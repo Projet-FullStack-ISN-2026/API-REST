@@ -2,7 +2,7 @@
  * @author imane
  */
 
-package fr.esigelec.projectFullStackAPI.dto;
+package fr.esigelec.projetFullStackAPI.dto;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
