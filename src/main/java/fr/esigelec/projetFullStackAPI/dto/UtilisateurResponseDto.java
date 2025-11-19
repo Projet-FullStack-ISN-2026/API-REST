@@ -14,7 +14,7 @@ public class UtilisateurResponseDto {
 	private String email;
 	private String lastname;
 	private String firstname;
-	private int role; // 0: Joueur, 1: Animateur, 2: Admin
+	private int role;
 
 	// Getters et Setters
 	public Long getId() {

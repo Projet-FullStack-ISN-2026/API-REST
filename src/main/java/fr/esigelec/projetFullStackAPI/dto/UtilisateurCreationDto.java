@@ -8,7 +8,7 @@ import jakarta.validation.constraints.NotBlank;
  */
 
 /**
- * Classe DTO pour l'inscription On sépare le DTO en 3 pour adapter les champs
+ * Classe DTO pour l'inscription. On sépare le DTO en 3 pour adapter les champs
  * obligatoires à chaque action (l'inscription demande un nom, la connexion non)
  * et surtout pour garantir la sécurité en n'envoyant jamais le mot de passe
  * dans la réponse affichée au client.
