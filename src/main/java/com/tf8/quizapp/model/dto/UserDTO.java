@@ -1,4 +1,4 @@
-package fr.esigelec.projetFullStackAPI.dto;
+package com.tf8.quizapp.model.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

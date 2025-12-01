@@ -1,6 +1,6 @@
 
 
-package fr.esigelec.projetFullStackAPI.dto;
+package com.tf8.quizapp.model.dto;
 
 import java.security.Timestamp;
 

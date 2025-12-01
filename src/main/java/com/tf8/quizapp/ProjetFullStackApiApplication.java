@@ -1,4 +1,4 @@
-package fr.esigelec.projetFullStackAPI;
+package com.tf8.quizapp;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

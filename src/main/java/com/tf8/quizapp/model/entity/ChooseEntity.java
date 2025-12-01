@@ -1,4 +1,4 @@
-package fr.esigelec.projetFullStackAPI.entity;
+package com.tf8.quizapp.model.entity;
 
 import jakarta.persistence.*;
 import java.sql.Timestamp;

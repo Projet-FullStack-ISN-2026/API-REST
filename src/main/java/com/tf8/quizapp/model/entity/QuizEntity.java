@@ -2,7 +2,7 @@
  * @author imane
  */
 
-package fr.esigelec.projetFullStackAPI.entity;
+package com.tf8.quizapp.model.entity;
 
 import java.sql.Timestamp;
 
