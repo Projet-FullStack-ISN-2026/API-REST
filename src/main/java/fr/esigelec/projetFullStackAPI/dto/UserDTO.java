@@ -1,22 +1,26 @@
 package fr.esigelec.projetFullStackAPI.dto;
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+
 /**
  * @author DIENE Serigne Fallou
  */
 
-/**
- *  Classe DTO pour la reponse
- */
-
-public class UtilisateurResponseDto {
+public class UserDTO {
 
 	private Long id;
+	@NotBlank(message = "Email is required")
+	@Email(message = "Invalid email format")
 	private String email;
+	private String password;
 	private String lastname;
 	private String firstname;
+
 	private int role;
 
-	// Getters et Setters
+	// Getters and Setters
+
 	public Long getId() {
 		return id;
 	}
@@ -31,6 +35,14 @@ public class UtilisateurResponseDto {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 	public String getLastname() {

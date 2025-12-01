@@ -6,15 +6,15 @@ import jakarta.validation.constraints.NotNull;
  * @author DIENE Serigne Fallou
  */
 
-public class Choose {
+public class ChooseDTO {
 
-	@NotNull(message = "L'ID de l'utilisateur est requis")
+	@NotNull(message = "User ID is required")
 	private Long idUtilisateur;
 
-	@NotNull(message = "L'ID de l'option choisie est requis")
+	@NotNull(message = "The ID of the selected option is required")
 	private Long idOption;
 
-	// Getters et Setters
+	// Getters and Setters
 	public Long getIdUtilisateur() {
 		return idUtilisateur;
 	}
