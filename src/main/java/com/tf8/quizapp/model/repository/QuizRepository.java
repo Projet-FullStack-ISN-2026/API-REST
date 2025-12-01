@@ -1,5 +1,5 @@
 package com.tf8.quizapp.model.repository;
 
-public class QuizRepository {
+public interface QuizRepository {
 
 }
