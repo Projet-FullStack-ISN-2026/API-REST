@@ -8,8 +8,8 @@ import java.util.List;
  */
 
 @Entity
-@Table(name = "utilisateur")
-public class Utilisateur {
+@Table(name = "user")
+public class UserEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -38,9 +38,9 @@ public class Utilisateur {
 	 * que la clé étrangère se trouve dans l'entité Choose.
 	 */
 	@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
-	private List<Choose> choices;
+	private List<ChooseEntity> choices;
 
-	public Utilisateur() {
+	public UserEntity() {
 	}
 
 	// Getters et Setters
@@ -93,11 +93,11 @@ public class Utilisateur {
 		this.role = role;
 	}
 
-	public List<Choose> getChoices() {
+	public List<ChooseEntity> getChoices() {
 		return choices;
 	}
 
-	public void setChoices(List<Choose> choices) {
+	public void setChoices(List<ChooseEntity> choices) {
 		this.choices = choices;
 	}
 }

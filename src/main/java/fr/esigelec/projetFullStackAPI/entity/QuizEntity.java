@@ -13,7 +13,7 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name ="options")
 
-public class Quiz {
+public class QuizEntity {
 
 	@Id
 	private Long id;

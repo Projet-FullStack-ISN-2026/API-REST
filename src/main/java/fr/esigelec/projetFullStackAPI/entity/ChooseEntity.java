@@ -9,7 +9,7 @@ import java.sql.Timestamp;
 
 @Entity
 @Table(name = "choose")
-public class Choose {
+public class ChooseEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,19 +21,19 @@ public class Choose {
 	// Lien vers Utilisateur
 	@ManyToOne
 	@JoinColumn(name = "utilisateur_id", nullable = false)
-	private Utilisateur utilisateur;
+	private UserEntity utilisateur;
 
 	// Lien vers Options
 	@ManyToOne
 	@JoinColumn(name = "options_id", nullable = false)
-	private Options option;
+	private OptionsEntity option;
 
 	// Lien vers Quiz
 	@ManyToOne
 	@JoinColumn(name = "quiz_id", nullable = false)
-	private Quiz quiz;
+	private QuizEntity quiz;
 
-	public Choose() {
+	public ChooseEntity() {
 	}
 
 	// --- Getters et Setters ---
@@ -54,27 +54,27 @@ public class Choose {
 		this.date = date;
 	}
 
-	public Utilisateur getUtilisateur() {
+	public UserEntity getUtilisateur() {
 		return utilisateur;
 	}
 
-	public void setUtilisateur(Utilisateur utilisateur) {
+	public void setUtilisateur(UserEntity utilisateur) {
 		this.utilisateur = utilisateur;
 	}
 
-	public Options getOption() {
+	public OptionsEntity getOption() {
 		return option;
 	}
 
-	public void setOption(Options option) {
+	public void setOption(OptionsEntity option) {
 		this.option = option;
 	}
 
-	public Quiz getQuiz() {
+	public QuizEntity getQuiz() {
 		return quiz;
 	}
 
-	public void setQuiz(Quiz quiz) {
+	public void setQuiz(QuizEntity quiz) {
 		this.quiz = quiz;
 	}
 }

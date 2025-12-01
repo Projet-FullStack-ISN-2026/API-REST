@@ -8,7 +8,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
 @Entity
-public class Options {
+public class OptionsEntity {
 
 	@Id
 	private Long id;
