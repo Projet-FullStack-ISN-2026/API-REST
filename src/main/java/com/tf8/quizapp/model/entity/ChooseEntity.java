@@ -18,17 +18,17 @@ public class ChooseEntity {
 	@Column(nullable = false)
 	private Timestamp date;
 
-	// Lien vers Utilisateur
+	// Link to User
 	@ManyToOne
-	@JoinColumn(name = "utilisateur_id", nullable = false)
-	private UserEntity utilisateur;
+	@JoinColumn(name = "user_id", nullable = false)
+	private UserEntity user;
 
-	// Lien vers Options
+	// Link to Options
 	@ManyToOne
 	@JoinColumn(name = "options_id", nullable = false)
 	private OptionsEntity option;
 
-	// Lien vers Quiz
+	// Link to Quiz
 	@ManyToOne
 	@JoinColumn(name = "quiz_id", nullable = false)
 	private QuizEntity quiz;
@@ -36,7 +36,7 @@ public class ChooseEntity {
 	public ChooseEntity() {
 	}
 
-	// --- Getters et Setters ---
+	// Getters and Setters
 
 	public Long getId() {
 		return id;
@@ -54,12 +54,12 @@ public class ChooseEntity {
 		this.date = date;
 	}
 
-	public UserEntity getUtilisateur() {
-		return utilisateur;
+	public UserEntity getUser() {
+		return user;
 	}
 
-	public void setUtilisateur(UserEntity utilisateur) {
-		this.utilisateur = utilisateur;
+	public void setUtilisateur(UserEntity user) {
+		this.user = user;
 	}
 
 	public OptionsEntity getOption() {
