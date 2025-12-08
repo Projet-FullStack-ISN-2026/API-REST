@@ -1,20 +1,24 @@
 package com.tf8.quizapp.model.dto;
- 
+
+import jakarta.validation.constraints.NotNull;
+
 /**
-* @author imane
-*/
- 
+ * @author imane
+ */
+
 public class QuestionDTO {
- 
+	
+	@NotNull(message = "Question's ID is required")
 	private Long id;
+	@NotNull(message = "The question content is required")
 	private String question;
- 
+
 	/**
 	 * Constructor without parameters
 	 */
 	public QuestionDTO() {
 	}
- 
+
 	/**
 	 * Getter of the question
 	 *
@@ -23,7 +27,7 @@ public class QuestionDTO {
 	public String getQuestion() {
 		return question;
 	}
- 
+
 	/**
 	 * Setter of the question
 	 *
@@ -32,7 +36,7 @@ public class QuestionDTO {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
- 
+
 	/**
 	 * Getter of the question's ID
 	 *
@@ -42,4 +46,3 @@ public class QuestionDTO {
 		return id;
 	}
 }
- 

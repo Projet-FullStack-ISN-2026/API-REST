@@ -1,20 +1,20 @@
 package com.tf8.quizapp.model.dto;
- 
+
 /**
-* @author imane
-*/
- 
+ * @author imane
+ */
+
 public class OptionsDTO {
- 
+
 	private Long id;
 	private String text;
- 
+
 	/**
 	 * Constructor without parameters
 	 */
 	public OptionsDTO() {
 	}
- 
+
 	/**
 	 * Getter of the option's content
 	 *
@@ -23,7 +23,7 @@ public class OptionsDTO {
 	public String getText() {
 		return text;
 	}
- 
+
 	/**
 	 * Setter of the option's content
 	 *
@@ -32,7 +32,7 @@ public class OptionsDTO {
 	public void setText(String text) {
 		this.text = text;
 	}
- 
+
 	/**
 	 * Getter of the option's id
 	 *
@@ -41,6 +41,5 @@ public class OptionsDTO {
 	public Long getId() {
 		return id;
 	}
- 
+
 }
- 

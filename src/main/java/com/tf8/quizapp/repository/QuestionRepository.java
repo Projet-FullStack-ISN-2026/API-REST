@@ -5,6 +5,9 @@ import org.springframework.stereotype.Repository;
  
 import com.tf8.quizapp.model.dto.QuestionDTO;
  
+/**
+ * @author imane
+ */
 @Repository
 public interface QuestionRepository  extends JpaRepository<QuestionDTO, Long> {
  

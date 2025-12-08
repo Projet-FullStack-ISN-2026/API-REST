@@ -2,11 +2,14 @@
 package com.tf8.quizapp.model.dto;
  
 import java.security.Timestamp;
+
+import jakarta.validation.constraints.NotNull;
  
 /**
 * @author imane
 */
 public class QuizDTO {
+	@NotNull(message = "Quiz ID is required")
 	private Long id;
 	private String title;
 	/**
