@@ -73,7 +73,7 @@ public ResponseEntity<AuthResponse> authLoginPost(@Parameter(in = ParameterIn.DE
             // Vous devriez ajouter une méthode mapSwaggerLoginToRequestDTO(body) si nécessaire.
             
             AuthResponse authResponse = userService.loginUser(body); 
-
+            
             // 2. Si la connexion réussit, le service retourne l'objet AuthResponse.
             return new ResponseEntity<>(authResponse, HttpStatus.OK);
 
