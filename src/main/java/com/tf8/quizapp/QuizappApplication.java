@@ -19,9 +19,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.format.FormatterRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @SpringBootApplication 
-@EnableJpaRepositories(basePackages = "io.repository")
-@EntityScan(basePackages = "io.entity")
-@ComponentScan(basePackages = { "io.swagger", "io.swagger.configuration", "io.service", "io.controller","io.controllerConfig", "io.repository" })
+@EnableJpaRepositories(basePackages = "com.tf8.quizapp.repository")
+@EntityScan(basePackages = "com.tf8.quizapp.model.entity")
+@ComponentScan(basePackages = { "com.tf8.quizapp" })
 public class QuizappApplication implements CommandLineRunner {
 
     @Override
