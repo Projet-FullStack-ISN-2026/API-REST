@@ -9,17 +9,11 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * 
  * @author DIENE Serigne Fallou
- * 
  */
 
 @Repository
 
 public interface UserRepository extends JpaRepository<UserEntity, Long> {
-
-	// Search for a user by their email address
-
 	Optional<UserEntity> findByEmail(String email);
-
 }
