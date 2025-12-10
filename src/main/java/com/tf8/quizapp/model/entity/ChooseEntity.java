@@ -38,12 +38,8 @@ public class ChooseEntity {
 	public ChooseEntity() {
 
 	}
-
-	// Getters and Setters
-
 	/**
 	 * Getter of the ID
-	 *
 	 * @return ID
 	 */
 	public Long getId() {
@@ -56,7 +52,6 @@ public class ChooseEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	/**
 	 * Getter of the date
 	 * @return date
@@ -64,7 +59,6 @@ public class ChooseEntity {
 	public Timestamp getDate() {
 		return date;
 	}
-
 	/**
 	 * Setter of the date
 	 * @param text the content of the option
@@ -72,7 +66,6 @@ public class ChooseEntity {
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
-	
 	/**
 	 * Getter of the user object
 	 * @return USER
@@ -80,7 +73,6 @@ public class ChooseEntity {
 	public UserEntity getUser() {
 		return user;
 	}
-
 	/**
 	 * Setter of the USER object
 	 * @param UserEntity object
@@ -109,7 +101,6 @@ public class ChooseEntity {
 	public QuizEntity getQuiz() {
 		return quiz;
 	}
-	
 	/**
 	 * Setter of the Quiz object
 	 * @param QuizEntity object
@@ -117,5 +108,4 @@ public class ChooseEntity {
 	public void setQuiz(QuizEntity quiz) {
 		this.quiz = quiz;
 	}
-
 }

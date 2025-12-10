@@ -30,15 +30,12 @@ public class UserEntity {
 	/**
 	 * User roles Player : 0 Host : 1 Admin : 2
 	 */
-
 	@Column(nullable = false)
 	private int role;
-
 	/**
 	 * The user can chose mupltiple choises MappedBy indicates that the Foreign Key
 	 * belongs to ChooseEntity
 	 */
-
 	@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
 	private List<ChooseEntity> choices;
 
@@ -47,7 +44,6 @@ public class UserEntity {
 	 */
 	public UserEntity() {
 	}
-
 	// Getters et Setters
 	/**
 	 * Getter of the ID
@@ -63,7 +59,6 @@ public class UserEntity {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	
 	/**
 	 * Getter of the user's email
 	 * @return the user's email 
@@ -71,7 +66,6 @@ public class UserEntity {
 	public String getEmail() {
 		return email;
 	}
-
 	/**
 	 * Setter of the user's email
 	 * @param email the user's email 
@@ -79,7 +73,6 @@ public class UserEntity {
 	public void setEmail(String email) {
 		this.email = email;
 	}
-
 	/**
 	 * Getter of the user's password
 	 * @return the user's password 
@@ -87,7 +80,6 @@ public class UserEntity {
 	public String getPassword() {
 		return password;
 	}
-
 	/**
 	 * Setter of the user's password
 	 * @param  password the user's password 
@@ -95,16 +87,13 @@ public class UserEntity {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
 	/**
 	 * Getter of the user's LastName
 	 * @return the user's LastName 
 	 */
 	public String getLastname() {
 		return lastname;
-
 	}
-
 	/**
 	 * Setter of the user's LastName
 	 * @param LastName the user's LastName 
@@ -112,7 +101,6 @@ public class UserEntity {
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
-
 	/**
 	 * Getter of the user's FisrtName
 	 * @return the user's FirstName 
@@ -120,7 +108,6 @@ public class UserEntity {
 	public String getFirstname() {
 		return firstname;
 	}
-
 	/**
 	 * Setter of the user's FirstName
 	 * @param FisrtName the user's FirstName 
@@ -128,7 +115,6 @@ public class UserEntity {
 	public void setFirstname(String firstname) {
 		this.firstname = firstname;
 	}
-
 	/**
 	 * Getter of the user's role
 	 * @return the user's role 
@@ -136,7 +122,6 @@ public class UserEntity {
 	public int getRole() {
 		return role;
 	}
-
 	/**
 	 * Setter of the user's role
 	 * @param the user's role 
@@ -144,7 +129,6 @@ public class UserEntity {
 	public void setRole(int role) {
 		this.role = role;
 	}
-
 	/**
 	 * Getter of the user's choices
 	 * @return the user's choices 
@@ -152,7 +136,6 @@ public class UserEntity {
 	public List<ChooseEntity> getChoices() {
 		return choices;
 	}
-
 	/**
 	 * Setter of the user's choices
 	 * @return the user's choices 
@@ -160,5 +143,4 @@ public class UserEntity {
 	public void setChoices(List<ChooseEntity> choices) {
 		this.choices = choices;
 	}
-
 }
