@@ -5,7 +5,7 @@
  */
 package com.tf8.quizapp.controller;
 
-import com.tf8.quizapp.model.dto.QuestionCreate;
+/*import com.tf8.quizapp.model.dto.QuestionCreate;
 import com.tf8.quizapp.model.dto.QuestionDetailed;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -103,5 +103,5 @@ public interface QuestionsApi {
 , @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody QuestionCreate body
 );
 
-}
+}*/
 

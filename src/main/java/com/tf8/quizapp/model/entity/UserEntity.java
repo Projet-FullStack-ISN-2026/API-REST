@@ -35,7 +35,7 @@ public class UserEntity {
 	 * The user can chose mupltiple choises MappedBy indicates that the Foreign Key
 	 * belongs to ChooseEntity
 	 */
-	@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<ChooseEntity> choices;
 
 	/**

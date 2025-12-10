@@ -1,4 +1,4 @@
-package com.tf8.quizapp.controller;
+/*package com.tf8.quizapp.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -115,4 +115,4 @@ public class QuestionsApiController implements QuestionsApi {
         return new ResponseEntity<QuestionDetailed>(HttpStatus.NOT_IMPLEMENTED);
     }
 
-}
+}*/
