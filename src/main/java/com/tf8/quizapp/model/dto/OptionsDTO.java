@@ -3,7 +3,6 @@ package com.tf8.quizapp.model.dto;
 /**
  * @author imane
  */
-
 public class OptionsDTO {
 
 	private Long id;
@@ -17,7 +16,6 @@ public class OptionsDTO {
 
 	/**
 	 * Getter of the option's content
-	 *
 	 * @return the content of the option
 	 */
 	public String getText() {
@@ -26,7 +24,6 @@ public class OptionsDTO {
 
 	/**
 	 * Setter of the option's content
-	 *
 	 * @param text the content of the option
 	 */
 	public void setText(String text) {
@@ -35,7 +32,6 @@ public class OptionsDTO {
 
 	/**
 	 * Getter of the option's id
-	 *
 	 * @return the option's id
 	 */
 	public Long getId() {

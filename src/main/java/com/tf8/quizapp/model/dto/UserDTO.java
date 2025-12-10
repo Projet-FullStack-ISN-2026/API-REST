@@ -5,101 +5,104 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
  
 /**
-
 * @author DIENE Serigne Fallou
-
 */
- 
+
 public class UserDTO {
  
 	private Long id;
-
 	@NotBlank(message = "Email is required")
-
 	@Email(message = "Invalid email format")
-
 	private String email;
-
 	private String password;
-
 	private String lastname;
-
 	private String firstname;
- 
 	private int role;
- 
-	// Getters and Setters
- 
+
+	// Getters and Setters 
+	/**
+	 * Getter of the user's ID
+	 * @return User's ID
+	 */
 	public Long getId() {
-
 		return id;
-
 	}
- 
+	/**
+	 * Setter of the user's ID
+	 * @param id User's ID
+	 */
 	public void setId(Long id) {
-
 		this.id = id;
-
 	}
- 
+	/**
+	 * Getter of the user's email 
+	 * @return User's email
+	 */
 	public String getEmail() {
-
 		return email;
-
 	}
- 
+	/**
+	 * Setter of the user's email 
+	 * @param email User's email 
+	 */
 	public void setEmail(String email) {
-
 		this.email = email;
-
 	}
- 
+	/**
+	 * Getter of the user's password
+	 * @return User's password
+	 */
 	public String getPassword() {
-
 		return password;
-
 	}
- 
+	/**
+	 * Setter of the user's password
+	 * @param password User's password
+	 */
 	public void setPassword(String password) {
-
 		this.password = password;
-
 	}
- 
+	/**
+	 * Getter of the user's Last name
+	 * @return User's Last name
+	 */
 	public String getLastname() {
-
 		return lastname;
-
 	}
- 
+	/**
+	 * Setter of the user's Last name
+	 * @param lastname
+	 */
 	public void setLastname(String lastname) {
-
 		this.lastname = lastname;
-
 	}
- 
+	/**
+	 * Getter of the user's first name
+	 * @return user's first name
+	 */
 	public String getFirstname() {
-
 		return firstname;
-
 	}
- 
+	/**
+	 * Setter of user's first name
+	 * @param firstname user's first name
+	 */
 	public void setFirstname(String firstname) {
-
 		this.firstname = firstname;
-
 	}
- 
+	/**
+	 * Getter of user's role
+	 * @return user's role
+	 */
 	public int getRole() {
-
 		return role;
-
 	}
- 
+	/**
+	 * Setter of user's role
+	 * @param role user's role
+	 */
 	public void setRole(int role) {
-
 		this.role = role;
-
 	}
 
 }

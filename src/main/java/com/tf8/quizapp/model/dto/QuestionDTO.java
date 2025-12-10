@@ -5,7 +5,6 @@ import jakarta.validation.constraints.NotNull;
 /**
  * @author imane
  */
-
 public class QuestionDTO {
 	
 	@NotNull(message = "Question's ID is required")
@@ -21,7 +20,6 @@ public class QuestionDTO {
 
 	/**
 	 * Getter of the question
-	 *
 	 * @return the question
 	 */
 	public String getQuestion() {
@@ -30,7 +28,6 @@ public class QuestionDTO {
 
 	/**
 	 * Setter of the question
-	 *
 	 * @param question
 	 */
 	public void setQuestion(String question) {
@@ -39,7 +36,6 @@ public class QuestionDTO {
 
 	/**
 	 * Getter of the question's ID
-	 *
 	 * @return the question's ID
 	 */
 	public Long getId() {

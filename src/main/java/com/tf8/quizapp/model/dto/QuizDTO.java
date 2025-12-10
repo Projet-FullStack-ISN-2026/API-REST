@@ -1,5 +1,4 @@
- 
-package com.tf8.quizapp.model.dto;
+ package com.tf8.quizapp.model.dto;
  
 import java.security.Timestamp;
 
@@ -30,89 +29,89 @@ public class QuizDTO {
 	 * 40 to display classement of the players
 	 */
 	private int step;
+	
 	/**
 	 * Gets the title.
-	 *
 	 * @return the title
 	 */
 	public String getTitle() {
 		return title;
 	}
+	
 	/**
 	 * Sets the title.
-	 *
 	 * @param title the new title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
+	
 	/**
 	 * Gets the current status.
-	 *
 	 * @return the status
 	 */
 	public int getStatus() {
 		return status;
 	}
+	
 	/**
 	 * Sets the status.
-	 *
 	 * @param status the new status to set
 	 */
 	public void setStatus(int status) {
 		this.status = status;
 	}
+	
 	/**
 	 * Gets the timestamp when the question started.
-	 *
 	 * @return the start question time
 	 */
 	public Timestamp getStartQuestionTime() {
 		return startQuestionTime;
 	}
+	
 	/**
 	 * Sets the timestamp for when the question started.
-	 *
 	 * @param startQuestionTime the start question time to set
 	 */
 	public void setStartQuestionTime(Timestamp startQuestionTime) {
 		this.startQuestionTime = startQuestionTime;
 	}
+	
 	/**
 	 * Gets the number of the current question.
-	 *
 	 * @return the current question number
 	 */
 	public int getCurrentQuestionNumber() {
 		return currentQuestionNumber;
 	}
+	
 	/**
 	 * Sets the number of the current question.
-	 *
 	 * @param currentQuestionNumber the current question number to set
 	 */
 	public void setCurrentQuestionNumber(int currentQuestionNumber) {
 		this.currentQuestionNumber = currentQuestionNumber;
 	}
+	
 	/**
 	 * Gets the current step.
-	 *
 	 * @return the step
 	 */
 	public int getStep() {
 		return step;
 	}
+	
 	/**
 	 * Sets the current step.
-	 *
 	 * @param step the new step to set
 	 */
 	public void setStep(int step) {
 		this.step = step;
 	}
+	
 	/**
 	 * Gets the quiz ID.
-	 *
 	 * @return the quiz's ID
 	 */
 	public Long getId() {
