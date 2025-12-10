@@ -14,7 +14,7 @@ import jakarta.persistence.Table;
 */
 
 @Entity
-@Table(name = "options")
+@Table(name = "quiz")
 public class QuizEntity {
 
 	@Id
