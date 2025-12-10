@@ -41,7 +41,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2025-12-01T13:32:49.487155975Z[GMT]")
 @RestController
 public class AuthApiController implements AuthApi {
 
