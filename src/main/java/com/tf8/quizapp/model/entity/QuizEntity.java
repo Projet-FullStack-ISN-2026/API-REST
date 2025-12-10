@@ -1,6 +1,9 @@
 package com.tf8.quizapp.model.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+
+import com.tf8.quizapp.model.dto.QuestionDTO;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -44,7 +47,7 @@ public class QuizEntity {
 	 * 40 to display the ranking of the players
 	 */
 	private int step;
-	
+	private ArrayList<QuestionEntity> questionsList;
 	/**
 	 * Getter of the quiz's title
 	 * @return the quiz's title
@@ -116,4 +119,13 @@ public class QuizEntity {
 	public void setStep(int step) {
 		this.step = step;
 	}
+	
+	/**
+	 * gets the questions' list
+	 */
+	public ArrayList<QuestionEntity> getQuestionList()
+	{
+		return (ArrayList<QuestionEntity>) questionsList;
+	}
+
 }
