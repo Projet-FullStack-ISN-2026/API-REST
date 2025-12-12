@@ -31,6 +31,7 @@ public class QuestionEntity {
 	public String getQuestion() {
 		return question;
 	}
+
 	/**
 	 * Setter of the question content 
 	 * @param question the question content
