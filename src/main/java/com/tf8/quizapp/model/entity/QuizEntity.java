@@ -23,6 +23,7 @@ public class QuizEntity {
 	
 	@Column(nullable = false)
 	private String title;
+
 	/**
 	 * The status of the quiz
 	 * 10 for the status : 'NOT STARTED'
@@ -31,18 +32,21 @@ public class QuizEntity {
 	 */
 	@Column(nullable = false)
 	private int status;
+
 	@Column(nullable = false)
 	private Timestamp startQuestionTime;
+
 	@Column(nullable = false)
 	private int currentQuestionNumber;
+
+    /**
+     * this attribute refers to what is displayed
+     * 10 to display a question
+     * 20 to display the percentage
+     * 30 to display the answer
+     * 40 to display the ranking of the players
+     */
 	@Column(nullable = false)
-	/**
-	 * this attribute refers to what is displayed 
-	 * 10 to display a question
-	 * 20 to display the percentage
-	 * 30 to display the answer
-	 * 40 to display the ranking of the players
-	 */
 	private int step;
 	
 	/**
@@ -60,6 +64,7 @@ public class QuizEntity {
 	public void setTitle(String title) {
 		this.title = title;
 	}
+
 	/**
 	 * Getter of the quiz's status
 	 * @return the quiz's status
@@ -67,13 +72,15 @@ public class QuizEntity {
 	public int getStatus() {
 		return status;
 	}
+
 	/**
 	 * Setter of the quiz's status
-	 * @param status  the quiz's status
+	 * @param status the quiz's status
 	 */
 	public void setStatus(int status) {
 		this.status = status;
 	}
+
 	/**
 	 * Getter of startQuestionTime
 	 * @return the starting time of the question
@@ -81,6 +88,7 @@ public class QuizEntity {
 	public Timestamp getStartQuestionTime() {
 		return startQuestionTime;
 	}
+
 	/**
 	 * Setter of startQuestionTime
 	 * @param startQuestionTime the starting time of the question
@@ -88,13 +96,15 @@ public class QuizEntity {
 	public void setStartQuestionTime(Timestamp startQuestionTime) {
 		this.startQuestionTime = startQuestionTime;
 	}
+
 	/**
 	 * Getter of the number of the current question 
 	 * @return  the number of the current question 
 	 */
 	public int getCurrentQuestionNumber() {
 		return currentQuestionNumber;
-	}	
+	}
+
 	/**
 	 * Setter of the number of the current question 
 	 * @param currentQuestionNumber number of the current question 
@@ -102,6 +112,7 @@ public class QuizEntity {
 	public void setCurrentQuestionNumber(int currentQuestionNumber) {
 		this.currentQuestionNumber = currentQuestionNumber;
 	}
+
 	/**
 	 * Getter of the question's step 
 	 * @return the question's step 
@@ -109,9 +120,10 @@ public class QuizEntity {
 	public int getStep() {
 		return step;
 	}
+
 	/**
 	 * Setter of the question's step 
-	 * @param step
+	 * @param step question's step
 	 */
 	public void setStep(int step) {
 		this.step = step;

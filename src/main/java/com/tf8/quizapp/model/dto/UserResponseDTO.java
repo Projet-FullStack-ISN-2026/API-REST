@@ -8,11 +8,9 @@ import jakarta.validation.constraints.NotBlank;
 * @author DIENE Serigne Fallou
 */
 
-public class UserDTO {
+public class UserResponseDTO {
  
 	private Long id;
-	@NotBlank(message = "Email is required")
-	@Email(message = "Invalid email format")
 	private String email;
 	private String password;
 	private String lastname;

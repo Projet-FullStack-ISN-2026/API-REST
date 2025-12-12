@@ -3,7 +3,7 @@
  * https://github.com/swagger-api/swagger-codegen
  * Do not edit the class manually.
  */
-package com.tf8.quizapp.controller;
+/*package com.tf8.quizapp.controller;
 
 import com.tf8.quizapp.model.dto.AnswerSubmit;
 import com.tf8.quizapp.model.dto.Leaderboard;
@@ -259,5 +259,5 @@ public interface QuizApi {
 , @Parameter(in = ParameterIn.PATH, description = "ID unique de la question.", required=true, schema=@Schema()) @PathVariable("questionId") Long questionId
 );
 
-}
+}*/
 

@@ -27,7 +27,6 @@ replay_pid*
 HELP.md
 bin/
 target/
-bin/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/

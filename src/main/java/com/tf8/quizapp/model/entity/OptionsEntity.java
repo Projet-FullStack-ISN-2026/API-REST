@@ -16,8 +16,10 @@ public class OptionsEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
 	@Column(nullable = false)
 	private String text;
+
 	/**
 	 * Getter of the Option's content
 	 * @return the Option's content
@@ -27,7 +29,7 @@ public class OptionsEntity {
 	}
 	/**
 	 * Setter of the Option's content
-	 * @param text  the Option's content
+	 * @param text the Option's content
 	 */
 	public void setText(String text) {
 		this.text = text;
