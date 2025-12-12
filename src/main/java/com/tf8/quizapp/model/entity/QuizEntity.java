@@ -2,14 +2,16 @@ package com.tf8.quizapp.model.entity;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 
-import com.tf8.quizapp.model.dto.QuestionDTO;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -34,10 +36,13 @@ public class QuizEntity {
 	 */
 	@Column(nullable = false)
 	private int status;
+	
 	@Column(nullable = false)
 	private Timestamp startQuestionTime;
+	
 	@Column(nullable = false)
 	private int currentQuestionNumber;
+	
 	@Column(nullable = false)
 	/**
 	 * this attribute refers to what is displayed 
@@ -47,8 +52,19 @@ public class QuizEntity {
 	 * 40 to display the ranking of the players
 	 */
 	private int step;
-	private ArrayList<QuestionEntity> questionsList;
-	/**
+	
+	 @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+	 private List<QuestionEntity> questions = new ArrayList<>();	
+	 
+	 public List<QuestionEntity> getQuestions() {
+		return questions;
+	}
+
+	 public void setQuestions(List<QuestionEntity> questions) {
+		 this.questions = questions;
+	 }
+
+	 /**
 	 * Getter of the quiz's title
 	 * @return the quiz's title
 	 */
@@ -123,9 +139,17 @@ public class QuizEntity {
 	/**
 	 * gets the questions' list
 	 */
-	public ArrayList<QuestionEntity> getQuestionList()
-	{
-		return (ArrayList<QuestionEntity>) questionsList;
+	public ArrayList<QuestionEntity> getQuestionList() {
+	    return new ArrayList<>(questions);
 	}
+
+	
+	public void setId(Long id) {
+		this.id=id;
+	}
+	public Long getId() {
+		return this.id;
+	}
+	
 
 }

@@ -27,7 +27,9 @@ public class UserEntity {
 	private String firstname;
 
 	/**
-	 * User roles Player : 0 Host : 1 Admin : 2
+	 * User roles Player : 0 
+	 * Host : 1 
+	 * Admin : 2
 	 */
 	@Column(nullable = false)
 	private int role;
@@ -35,7 +37,7 @@ public class UserEntity {
 	 * The user can chose mupltiple choises MappedBy indicates that the Foreign Key
 	 * belongs to ChooseEntity
 	 */
-	@OneToMany(mappedBy = "utilisateur", cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
 	private List<ChooseEntity> choices;
 
 	/**
@@ -43,7 +45,7 @@ public class UserEntity {
 	 */
 	public UserEntity() {
 	}
-	// Getters et Setters
+	// Getters and Setters
 	/**
 	 * Getter of the ID
 	 * @return ID
