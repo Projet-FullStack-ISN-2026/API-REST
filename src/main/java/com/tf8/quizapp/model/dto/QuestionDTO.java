@@ -1,5 +1,7 @@
 package com.tf8.quizapp.model.dto;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -7,10 +9,13 @@ import jakarta.validation.constraints.NotNull;
  */
 public class QuestionDTO {
 	
-	@NotNull(message = "Question's ID is required")
+	//@NotNull(message = "Question's ID is required")
 	private Long id;
 	@NotNull(message = "The question content is required")
 	private String question;
+	
+	//A rajouter dans la DTO
+	private List<OptionsDTO> options;
 
 	/**
 	 * Constructor without parameters
@@ -41,4 +46,17 @@ public class QuestionDTO {
 	public Long getId() {
 		return id;
 	}
+
+	public void setId(Long  id2) {
+		this.id = id2;
+		
+	}
+	
+	public List<OptionsDTO> getOptions() {
+        return options;
+    }
+	
+    public void setOptions(List<OptionsDTO> options) {
+        this.options = options;
+    }
 }

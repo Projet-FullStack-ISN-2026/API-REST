@@ -13,8 +13,8 @@ public class UserResponseDTO {
 	private Long id;
 	private String email;
 	private String password;
-	private String lastname;
-	private String firstname;
+	private String lastName;
+	private String firstName;
 	private int role;
 
 	// Getters and Setters 
@@ -64,29 +64,29 @@ public class UserResponseDTO {
 	 * Getter of the user's Last name
 	 * @return User's Last name
 	 */
-	public String getLastname() {
-		return lastname;
+	public String getLastName() {
+		return lastName;
 	}
 	/**
 	 * Setter of the user's Last name
 	 * @param lastname
 	 */
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
 	}
 	/**
 	 * Getter of the user's first name
 	 * @return user's first name
 	 */
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
 	/**
 	 * Setter of user's first name
 	 * @param firstname user's first name
 	 */
-	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
 	}
 	/**
 	 * Getter of user's role
