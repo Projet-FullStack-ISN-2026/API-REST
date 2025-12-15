@@ -39,71 +39,71 @@ public class ChooseEntity {
 
 	}
 	/**
-	 * Getter of the ID
-	 * @return ID
+	 * Getter of the choice's ID
+	 * @return ID the choice's ID
 	 */
 	public Long getId() {
 		return id;
 	}
 	/**
-	 * Setter of the ID
-	 * @param ID
+	 * Setter of the choice's ID
+	 * @param ID the choice's ID
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
 	/**
-	 * Getter of the date
-	 * @return date
+	 * Getter of the choice's date
+	 * @return date the choice's date
 	 */
 	public Timestamp getDate() {
 		return date;
 	}
 	/**
-	 * Setter of the date
-	 * @param text the content of the option
+	 * Setter of the choice's date
+	 * @param date the choice's date
 	 */
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
 	/**
 	 * Getter of the user object
-	 * @return USER
+	 * @return USER the user that made the choice
 	 */
 	public UserEntity getUser() {
 		return user;
 	}
 	/**
-	 * Setter of the USER object
-	 * @param UserEntity object
+	 * Setter of the USER the user that made the choice
+	 * @param UserEntity the user that made the choice
 	 */
 	public void setUser(UserEntity user) {
 		this.user = user;
 	}
 	/**
-	 * Getter of the Option object
+	 * Getter of the Option object chosen 
 	 * @return Option
 	 */
 	public OptionsEntity getOption() {
 		return option;
 	}
 	/**
-	 * Setter of the Option object
-	 * @param OptionEntity object
+	 * Setter of the Option object chosen by the user
+	 * @param OptionEntity the option chosen by the user
 	 */
 	public void setOption(OptionsEntity option) {
 		this.option = option;
 	}
 	/**
-	 * Getter of the QuizEntity object
-	 * @return QuizEntity object
+	 * Getter of the QuizEntity 
+	 * @return QuizEntity that the player are in
 	 */
 	public QuizEntity getQuiz() {
 		return quiz;
 	}
 	/**
 	 * Setter of the Quiz object
-	 * @param QuizEntity object
+	 * @param QuizEntity that the player are in
 	 */
 	public void setQuiz(QuizEntity quiz) {
 		this.quiz = quiz;
