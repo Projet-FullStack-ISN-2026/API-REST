@@ -1,6 +1,8 @@
 package com.tf8.quizapp.model.entity;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+
 import java.util.List;
 
 /**
@@ -12,17 +14,18 @@ import java.util.List;
 public class UserEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotBlank(message = "User's ID is required")
 	private Long id;
-
-	@Column(nullable = false, unique = true, length = 50)
+	@NotBlank(message = "User'sEmail is required")
+	@Column(nullable = false, unique = true)
 	private String email;
-
+	@NotBlank(message = "User'sPassword is required")
 	@Column(nullable = false)
 	private String password;
-
+	@NotBlank(message = "User'sLastname is required")
 	@Column(nullable = false, length = 20)
 	private String lastname;
-
+	@NotBlank(message = "User'sFirstname is required")
 	@Column(nullable = false, length = 20)
 	private String firstname;
 

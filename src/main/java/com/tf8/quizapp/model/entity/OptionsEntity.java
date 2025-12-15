@@ -28,13 +28,22 @@ public class OptionsEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "question_id")
 	private QuestionEntity question;
+	/**
+	 * Getter of the option's ID
+	 * @return ID the option's ID
+	 */
 	public Long getId() {
 	    return this.id;
-	 }
+	}
+	/**
+	 * Setter of the options' ID
+	 * @param ID the option's ID
+	 */
 	public void setId(Long id)
 	{
 	  this.id=id;
 	}
+	
 	/**
 	 * Getter of the Option's content
 	 * @return the Option's content

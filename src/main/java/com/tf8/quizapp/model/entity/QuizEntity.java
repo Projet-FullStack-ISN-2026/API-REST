@@ -13,6 +13,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 /**
 * @author imane
@@ -24,9 +26,11 @@ public class QuizEntity {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@NotBlank(message = "Quiz's ID is required")
 	private Long id;
 	
 	@Column(nullable = false)
+	@NotBlank(message = "Quiz's title is required")
 	private String title;
 	/**
 	 * The status of the quiz
@@ -35,15 +39,19 @@ public class QuizEntity {
 	 * 30 for the status 'FINISHED'
 	 */
 	@Column(nullable = false)
+	@NotBlank(message = "Quiz's status is  required")
 	private int status;
 	
 	@Column(nullable = false)
+	@NotBlank(message = "Quiz's starting time is required")
 	private Timestamp startQuestionTime;
 	
 	@Column(nullable = false)
+	@NotNull(message = "Quiz's current question number is required")
 	private int currentQuestionNumber;
 	
 	@Column(nullable = false)
+	@NotNull(message = "Quiz'step is required")
 	/**
 	 * this attribute refers to what is displayed 
 	 * 10 to display a question
@@ -53,18 +61,39 @@ public class QuizEntity {
 	 */
 	private int step;
 	
-	 @OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
-	 private List<QuestionEntity> questions = new ArrayList<>();	
+	@OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
+	private List<QuestionEntity> questions = new ArrayList<>();	
 	 
-	 public List<QuestionEntity> getQuestions() {
+	/**
+	 * Getter of the quiz's questions
+	 * @return the quiz's questions
+	 */
+	public List<QuestionEntity> getQuestions() {
 		return questions;
 	}
-
-	 public void setQuestions(List<QuestionEntity> questions) {
+	/**
+	 * Gets the quiz ID.
+	 * @return the quiz's ID
+	 */
+	public void setId(Long id) {
+		this.id=id;
+	}
+	/**
+	 * Setter of the quiz's ID
+	 * @param id the quiz's ID
+	 */
+	public Long getId() {
+		return this.id;
+	}
+	/**
+	 * Setter of the quiz's questions
+	 * @param questions the quiz's questions
+	 */
+	public void setQuestions(List<QuestionEntity> questions) {
 		 this.questions = questions;
-	 }
+	}
 
-	 /**
+	/**
 	 * Getter of the quiz's title
 	 * @return the quiz's title
 	 */
@@ -142,14 +171,4 @@ public class QuizEntity {
 	public ArrayList<QuestionEntity> getQuestionList() {
 	    return new ArrayList<>(questions);
 	}
-
-	
-	public void setId(Long id) {
-		this.id=id;
-	}
-	public Long getId() {
-		return this.id;
-	}
-	
-
 }

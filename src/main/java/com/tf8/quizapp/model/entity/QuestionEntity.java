@@ -27,13 +27,6 @@ public class QuestionEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	
-	public Long getId() {
-		return id;
-	}
-	public void setId(Long id) {
-		this.id = id;
-	}
 	@Column(nullable = false)
 	private String question;
 	
@@ -43,6 +36,21 @@ public class QuestionEntity {
 
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<OptionsEntity> options = new ArrayList<>();
+	
+	/**
+	 * Getter of the question's ID
+	 * return the question's ID
+	 */
+	public Long getId() {
+		return id;
+	}
+	/**
+	 * Setter of the question's ID
+	 * @param ID the question's ID
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
 	/**
 	 * Getter of the question content
 	 * @return the question content
@@ -50,9 +58,17 @@ public class QuestionEntity {
 	public String getQuestion() {
 		return question;
 	}
+	/**
+	 * Getter of the options list
+	 * @return the options list
+	 */
 	public List<OptionsEntity> getOptions() {
 		return options;
 	}
+	/**
+	 * Setter of the options list
+	 * @param options the options list
+	 */
 	public void setOptions(List<OptionsEntity> options) {
 		this.options = options;
 	}
@@ -63,10 +79,17 @@ public class QuestionEntity {
 	public void setQuestion(String question) {
 		this.question = question;
 	}
-
+	/**
+	 * Getter of the quiz that belongs to the current question
+	 * @return the quiz that belongs to the current question
+	 */
 	public QuizEntity getQuiz() {
 		return quiz;
 	}
+	/**
+	 * Setter of the quiz that belongs to the current question
+	 * @param quiz the quiz that belongs to the current question
+	 */
 	public void setQuiz(QuizEntity quiz) {
 		this.quiz = quiz;
 	}
