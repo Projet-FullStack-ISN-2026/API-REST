@@ -47,4 +47,10 @@ public class OptionsDTO {
 	public void setIsCorrect(boolean isCorrect) {
 		this.isCorrect = isCorrect;
 	}
+
+	public boolean getIsCorrect() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

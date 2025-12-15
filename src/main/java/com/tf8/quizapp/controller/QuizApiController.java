@@ -376,13 +376,6 @@ public class QuizApiController implements QuizApi {
         return getQuiz(quizId); // Réutilise le mock getQuiz
     }
 
-    // --- 8. DÉLIER DES QUESTIONS ---
-    @Override
-    public ResponseEntity<?> unlinkQuizQuestions(Long quizId) {
-        // Mock : 204 No Content
-        return ResponseEntity.noContent().build();
-    }
-
     // --- 9. LANCER LE QUIZ (Start) ---
     @Override
     public ResponseEntity<?> launchQuiz(Long quizId) {
@@ -408,6 +401,78 @@ public class QuizApiController implements QuizApi {
         state.setStep(0);
         
         return ResponseEntity.ok(state);
+    }
+
+    @Override
+    public ResponseEntity<?> unlinkQuizQuestions(Long quizId, Long questionId) {
+        // Mock : 204 No Content (standard pour une suppression/déliaison réussie)
+        return ResponseEntity.ok("Unliked");
+    }
+
+
+    @Override
+    public ResponseEntity<?> joinQuiz(Long quizId) {
+        // Mock : 200 OK pour confirmer l'inscription du joueur
+        return ResponseEntity.ok("Joueur inscrit avec succès au quiz " + quizId);
+    }
+
+    @Override
+    public ResponseEntity<?> getQuizLobbyStatus(Long quizId) {
+        return ResponseEntity.ok("C'est pas fait");
+    }
+
+    // --- DÉROULEMENT DES QUESTIONS ---
+
+    @Override
+    public ResponseEntity<?> getCurrentQuestion(Long quizId) {
+        // Mock : La question actuelle affichée aux joueurs
+        QuestionDTO currentQ = new QuestionDTO();
+        currentQ.setId(105L);
+        currentQ.setQuestion("Quelle est la vitesse de la lumière ?");
+        
+        // On ajoute des options factices
+        OptionsDTO opt1 = new OptionsDTO(); opt1.setId(1L); opt1.setText("300 000 km/s");
+        OptionsDTO opt2 = new OptionsDTO(); opt2.setId(2L); opt2.setText("100 km/h");
+        currentQ.setOptions(Arrays.asList(opt1, opt2));
+
+        return ResponseEntity.ok(currentQ);
+    }
+
+    @Override
+    public ResponseEntity<?> getNextQuestion(Long quizId) {
+        // Mock : La question suivante (prévisualisation animateur)
+    	QuestionDTO nextQ = new QuestionDTO();
+        nextQ.setId(106L);
+        nextQ.setQuestion("Qui a peint la Joconde ?");
+        
+        OptionsDTO optA = new OptionsDTO(); optA.setId(3L); optA.setText("Leonardo da Vinci");
+        OptionsDTO optB = new OptionsDTO(); optB.setId(4L); optB.setText("Picasso");
+        nextQ.setOptions(Arrays.asList(optA, optB));
+
+        return ResponseEntity.ok(nextQ);
+    }
+
+    @Override
+    public ResponseEntity<?> submitAnswer(Long quizId) {
+        // Mock : 202 Accepted (La réponse a été reçue et sera traitée)
+        return ResponseEntity.accepted().body("Réponse enregistrée");
+    }
+
+    // --- RÉSULTATS & STATS ---
+
+    @Override
+    public ResponseEntity<?> getLeaderboard(Long quizId) {
+        return ResponseEntity.ok("C'est pas fait");
+    }
+
+    @Override
+    public ResponseEntity<?> getQuizStats(Long quizId) {
+        return ResponseEntity.ok("C'est pas fait");
+    }
+
+    @Override
+    public ResponseEntity<?> getCorrectAnswer(Long quizId) {
+        return ResponseEntity.ok("C'est pas fait");
     }
 	
 }
