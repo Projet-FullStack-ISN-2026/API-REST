@@ -295,8 +295,10 @@ public interface QuizApi {
 	
 	@Operation(summary = "ModifyQuiz")
     @RequestMapping(value = "/quiz/{quizId}", method = RequestMethod.PUT)
-    ResponseEntity<?> modifyQuiz(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId,
-    		@Parameter(in = ParameterIn.DEFAULT, required=true) @Valid @RequestBody QuizDTO body);
+    ResponseEntity<?> modifyQuiz(
+		@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId,
+    	@Parameter(in = ParameterIn.DEFAULT, required=true) @Valid @RequestBody QuizDTO body
+	);
 	
 	@Operation(summary = "DeleteQuiz")
     @RequestMapping(value = "/quiz/{quizId}", method = RequestMethod.DELETE)
