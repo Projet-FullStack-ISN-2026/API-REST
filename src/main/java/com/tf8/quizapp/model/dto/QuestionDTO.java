@@ -1,5 +1,7 @@
 package com.tf8.quizapp.model.dto;
 
+import java.util.List;
+
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -40,5 +42,15 @@ public class QuestionDTO {
 	 */
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(long l) {
+		this.id=l;
+		
+	}
+
+	public void setOptions(List<OptionsDTO> asList) {
+		// TODO Auto-generated method stub
+		
 	}
 }

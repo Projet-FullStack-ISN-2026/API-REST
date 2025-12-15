@@ -38,4 +38,14 @@ public class OptionsDTO {
 		return id;
 	}
 
+	public void setId(long l) {
+		this.id=l;
+		
+	}
+
+	public void setIsCorrect(boolean b) {
+		
+		
+	}
+
 }

@@ -1,6 +1,8 @@
  package com.tf8.quizapp.model.dto;
  
 import java.security.Timestamp;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
 
 import jakarta.validation.constraints.NotNull;
  
@@ -18,7 +20,7 @@ public class QuizDTO {
 	 * 30 for the status 'FINISHED'
 	 */
 	private int status;
-	private Timestamp startQuestionTime;
+	private OffsetDateTime startQuestionTime;
 	private int currentQuestionNumber;
 	
 	/**
@@ -66,16 +68,16 @@ public class QuizDTO {
 	 * Gets the timestamp when the question started.
 	 * @return the start question time
 	 */
-	public Timestamp getStartQuestionTime() {
+	public OffsetDateTime getStartQuestionTime() {
 		return startQuestionTime;
 	}
 	
 	/**
 	 * Sets the timestamp for when the question started.
-	 * @param startQuestionTime the start question time to set
+	 * @param offsetDateTime the start question time to set
 	 */
-	public void setStartQuestionTime(Timestamp startQuestionTime) {
-		this.startQuestionTime = startQuestionTime;
+	public void setStartQuestionTime(OffsetDateTime offsetDateTime) {
+		this.startQuestionTime = offsetDateTime;
 	}
 	
 	/**
@@ -116,6 +118,16 @@ public class QuizDTO {
 	 */
 	public Long getId() {
 		return id;
+	}
+
+	public void setId(long l) {
+		this.id = l;
+		
+	}
+
+	public void setQuestions(ArrayList arrayList) {
+		// TODO Auto-generated method stub
+		
 	}
 }
  
