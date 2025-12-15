@@ -1,15 +1,16 @@
-/**
- * @author TEVANE Matthieu
- */
 package com.tf8.quizapp.model.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
+/**
+ * @author TEVANE Matthieu
+ */
+
 public class UserRequestDTO {
 
-	@NotBlank(message = "L'email est obligatoire")
+	  @NotBlank(message = "L'email est obligatoire")
     @Email(message = "Format d'email invalide")
     private String email;
 
@@ -23,39 +24,37 @@ public class UserRequestDTO {
     @NotBlank(message = "Le nom est obligatoire")
     private String lastName;
 
-	public UserRequestDTO() {}
+    public UserRequestDTO() {}
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+      return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+      this.email = email;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+      return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+      this.password = password;
+    }
 
-	public String getFirstName() {
-		return firstName;
-	}
+    public String getFirstName() {
+        return firstName;
+    }
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
 
-	public String getLastName() {
-		return lastName;
-	}
+    public String getLastName() {
+        return lastName;
+    }
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
-    
-    
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 }
