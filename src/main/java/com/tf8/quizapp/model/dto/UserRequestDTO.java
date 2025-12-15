@@ -10,7 +10,7 @@ import jakarta.validation.constraints.Size;
 
 public class UserRequestDTO {
 
-	  @NotBlank(message = "L'email est obligatoire")
+	@NotBlank(message = "L'email est obligatoire")
     @Email(message = "Format d'email invalide")
     private String email;
 
