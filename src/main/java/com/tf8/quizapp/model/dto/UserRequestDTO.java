@@ -5,56 +5,60 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * @author TEVANE Matthieu
+ * DTO utilisé pour recevoir les données de l'utilisateur lors de la création (POST) 
+ * ou la mise à jour (PUT) d'un compte.
  */
-
 public class UserRequestDTO {
 
-	@NotBlank(message = "L'email est obligatoire")
-    @Email(message = "Format d'email invalide")
+    // L'ID est omis car il est généré par la BDD.
+
+    @NotBlank(message = "L'email est requis.")
+    @Email(message = "Format d'email invalide.")
     private String email;
 
-    @NotBlank(message = "Le mot de passe est obligatoire")
-    //@Size(min = 8, message = "8 caractères minimum")
-    private String password;
+    @NotBlank(message = "Le mot de passe est requis.")
+    @Size(min = 6, message = "Le mot de passe doit contenir au moins 6 caractères.")
+    private String password; 
 
-    @NotBlank(message = "Le prénom est obligatoire")
-    private String firstName;
+    @NotBlank(message = "Le nom est requis.")
+    private String lastname;
+    
+    @NotBlank(message = "Le prénom est requis.")
+    private String firstname;
 
-    @NotBlank(message = "Le nom est obligatoire")
-    private String lastName;
+    // Le 'role' n'est pas exposé ici car il est géré par la logique métier/sécurité.
 
-    public UserRequestDTO() {}
+    // --- Getters et Setters ---
 
     public String getEmail() {
-      return email;
+        return email;
     }
 
     public void setEmail(String email) {
-      this.email = email;
+        this.email = email;
     }
 
     public String getPassword() {
-      return password;
+        return password;
     }
 
     public void setPassword(String password) {
-      this.password = password;
+        this.password = password;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getFirstname() {
+        return firstname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
     }
 }

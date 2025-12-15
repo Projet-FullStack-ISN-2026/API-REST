@@ -5,6 +5,7 @@ import java.io.IOException;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletResponse;
 
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2025-12-01T13:32:49.487155975Z[GMT]")
 public class ApiOriginFilter implements Filter {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response,

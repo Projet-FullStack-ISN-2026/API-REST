@@ -46,8 +46,8 @@ public class UserServiceImpl implements UserService {
 
         UserEntity user = new UserEntity();
         user.setEmail(requestDTO.getEmail());
-        user.setFirstname(requestDTO.getFirstName());
-        user.setLastname(requestDTO.getLastName());
+        user.setFirstname(requestDTO.getFirstname());
+        user.setLastname(requestDTO.getLastname());
         
         // STOCKAGE TEXTE BRUT (à sécurisé)
         user.setPassword(requestDTO.getPassword());
@@ -69,8 +69,8 @@ public class UserServiceImpl implements UserService {
         UserResponseDTO dto = new UserResponseDTO();
         dto.setId(user.getId());
         dto.setEmail(user.getEmail());
-        dto.setFirstName(user.getFirstname());
-        dto.setLastName(user.getLastname());
+        dto.setFirstname(user.getFirstname());
+        dto.setLastname(user.getLastname());
         dto.setRole(user.getRole());
         return dto;
     }

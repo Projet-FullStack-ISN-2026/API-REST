@@ -1,27 +1,47 @@
 package com.tf8.quizapp.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 import com.tf8.quizapp.model.dto.OptionsDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.entity.OptionsEntity;
 import com.tf8.quizapp.model.entity.QuestionEntity;
 import com.tf8.quizapp.repository.QuestionRepository;
 import com.tf8.quizapp.service.QuestionService;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class QuestionServiceImpl implements QuestionService {
-
-    private final QuestionRepository questionRepository;
+	
+	private final QuestionRepository questionRepository;
 
     public QuestionServiceImpl(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
+    
+    @Override
+    @Transactional
+    public QuestionDTO getQuestion (Long id) {
+    	Optional<QuestionEntity> questionEntity = questionRepository.findById(id);
+
+        // 2. Vérifier si l'entité existe
+    	if (questionEntity.isPresent()) {
+            // 3. Mapper l'entité trouvée en DTO et la retourner
+    		return mapToDTO(questionEntity.get());
+    	} else {
+            // 4. Si la question n'est pas trouvée, retourner null ou, 
+            //    mieux, lancer une exception personnalisée (non implémentée ici)
+    		return null; 
+    	}
+    }
+    
 
     @Override
     @Transactional
@@ -32,7 +52,7 @@ public class QuestionServiceImpl implements QuestionService {
 
         // 2. Transformer les options DTO en Entités et les lier
         if (dto.getOptions() != null) {
-            List<OptionsEntity> optionsEntities = new ArrayList<>();
+            Set<OptionsEntity> optionsEntities = new HashSet<>();
             
             for (OptionsDTO optDto : dto.getOptions()) {
                 OptionsEntity optEntity = new OptionsEntity();
@@ -73,7 +93,7 @@ public class QuestionServiceImpl implements QuestionService {
                 OptionsDTO optDto = new OptionsDTO();
                 optDto.setId(optEntity.getId());
                 optDto.setText(optEntity.getText());
-                optDto.setIsCorrect(optEntity.getIsCorrect());
+                optDto.setCorrect(optEntity.getIsCorrect());
                 return optDto;
             }).collect(Collectors.toList());
             dto.setOptions(optionsDtos);
@@ -81,20 +101,25 @@ public class QuestionServiceImpl implements QuestionService {
         
         return dto;
     }
-    
-    @Override
-    @Transactional
-    public QuestionDTO getQuestion (Long id) {
-    	Optional<QuestionEntity> questionEntity = questionRepository.findById(id);
- 
-        // 2. Vérifier si l'entité existe
-    	if (questionEntity.isPresent()) {
-            // 3. Mapper l'entité trouvée en DTO et la retourner
-    		return mapToDTO(questionEntity.get());
-    	} else {
-            // 4. Si la question n'est pas trouvée, retourner null ou,
-            //    mieux, lancer une exception personnalisée (non implémentée ici)
-    		return null;
-    	}
-    }
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

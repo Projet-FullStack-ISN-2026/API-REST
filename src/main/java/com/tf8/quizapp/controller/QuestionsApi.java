@@ -4,23 +4,7 @@
  * Do not edit the class manually.
  */
 package com.tf8.quizapp.controller;
-
-import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-
-import com.tf8.quizapp.model.dto.QuestionDTO;
-
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import jakarta.validation.Valid;
-
-/*import com.tf8.quizapp.model.dto.QuestionCreate;
-import com.tf8.quizapp.model.dto.QuestionDetailed;
+/*
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -40,6 +24,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.tf8.quizapp.model.dto.QuestionDTO;
+
 import org.springframework.web.bind.annotation.CookieValue;
 
 import jakarta.validation.Valid;
@@ -47,30 +34,31 @@ import jakarta.validation.constraints.*;
 import java.util.List;
 import java.util.Map;
 
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2025-12-01T13:32:49.487155975Z[GMT]")
 @Validated
 public interface QuestionsApi {
 
     @Operation(summary = "Lister toutes les questions de la banque", description = "Récupère une liste de toutes les questions disponibles dans la banque centrale.", security = {
         @SecurityRequirement(name = "bearerAuth")    }, tags={ "Gestion des Questions (Banque)" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Liste de toutes les questions.", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = QuestionDetailed.class)))) })
+        @ApiResponse(responseCode = "200", description = "Liste de toutes les questions.", content = @Content(mediaType = "application/json", array = @ArraySchema(schema = @Schema(implementation = QuestionDTO.class)))) })
     @RequestMapping(value = "/questions",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<QuestionDetailed>> questionsGet();
+    ResponseEntity<List<QuestionDTO>> questionsGet();
 
 
     @Operation(summary = "Créer une nouvelle question dans la banque", description = "Ajoute une nouvelle question (avec ses options) à la banque centrale.", security = {
         @SecurityRequirement(name = "bearerAuth")    }, tags={ "Gestion des Questions (Banque)" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "201", description = "Question créée.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = QuestionDetailed.class))),
+        @ApiResponse(responseCode = "201", description = "Question créée.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = QuestionDTO.class))),
         
         @ApiResponse(responseCode = "403", description = "Accès refusé.") })
     @RequestMapping(value = "/questions",
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.POST)
-    ResponseEntity<QuestionDetailed> questionsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody QuestionCreate body
+    ResponseEntity<QuestionDTO> questionsPost(@Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody QuestionDTO body
 );
 
 
@@ -91,20 +79,20 @@ public interface QuestionsApi {
     @Operation(summary = "Obtenir les détails d'une question", description = "Récupère les détails complets d'une question de la banque.", security = {
         @SecurityRequirement(name = "bearerAuth")    }, tags={ "Gestion des Questions (Banque)" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Détails de la question.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = QuestionDetailed.class))),
+        @ApiResponse(responseCode = "200", description = "Détails de la question.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = QuestionDTO.class))),
         
         @ApiResponse(responseCode = "404", description = "Question non trouvée.") })
     @RequestMapping(value = "/questions/{questionId}",
         produces = { "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<QuestionDetailed> questionsQuestionIdGet(@Parameter(in = ParameterIn.PATH, description = "ID unique de la question.", required=true, schema=@Schema()) @PathVariable("questionId") Long questionId
+    ResponseEntity<QuestionDTO> questionsQuestionIdGet(@Parameter(in = ParameterIn.PATH, description = "ID unique de la question.", required=true, schema=@Schema()) @PathVariable("questionId") Long questionId
 );
 
 
     @Operation(summary = "Modifier une question dans la banque", description = "Met à jour le contenu d'une question et/ou de ses options dans la banque centrale.", security = {
         @SecurityRequirement(name = "bearerAuth")    }, tags={ "Gestion des Questions (Banque)" })
     @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "Question mise à jour.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = QuestionDetailed.class))),
+        @ApiResponse(responseCode = "200", description = "Question mise à jour.", content = @Content(mediaType = "application/json", schema = @Schema(implementation = QuestionDTO.class))),
         
         @ApiResponse(responseCode = "403", description = "Accès refusé."),
         
@@ -113,39 +101,9 @@ public interface QuestionsApi {
         produces = { "application/json" }, 
         consumes = { "application/json" }, 
         method = RequestMethod.PUT)
-    ResponseEntity<QuestionDetailed> questionsQuestionIdPut(@Parameter(in = ParameterIn.PATH, description = "ID unique de la question.", required=true, schema=@Schema()) @PathVariable("questionId") Long questionId
-, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody QuestionCreate body
+    ResponseEntity<QuestionDTO> questionsQuestionIdPut(@Parameter(in = ParameterIn.PATH, description = "ID unique de la question.", required=true, schema=@Schema()) @PathVariable("questionId") Long questionId
+, @Parameter(in = ParameterIn.DEFAULT, description = "", required=true, schema=@Schema()) @Valid @RequestBody QuestionDTO body
 );
 
-}*/
-
-@Validated
-public interface QuestionsApi {
-	@Operation(summary = "Lister toutes les questions de la banque")
-    @RequestMapping(value = "/questions", method = RequestMethod.GET)
-    ResponseEntity<?> listAllQuestions();
-
-    @Operation(summary = "Créer une nouvelle question dans la banque")
-    @RequestMapping(value = "/questions", method = RequestMethod.POST)
-    ResponseEntity<?> createQuestion(@Valid @RequestBody QuestionDTO body);
-
-    @Operation(summary = "Obtenir les détails d'une question")
-    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.GET)
-    ResponseEntity<?> getQuestion(
-            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("questionId") Long questionId
-    );
-
-    @Operation(summary = "Modifier une question dans la banque")
-    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.PUT)
-    ResponseEntity<?> modifyQuestion(
-            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("questionId") Long questionId,
-            @Valid @RequestBody QuestionDTO body
-    );
-
-    @Operation(summary = "Supprimer une question de la banque")
-    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.DELETE)
-    ResponseEntity<?> deleteQuestion(
-            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("questionId") Long questionId
-    );
-	
 }
+*/

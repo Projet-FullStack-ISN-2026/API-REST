@@ -1,12 +1,23 @@
 package com.tf8.quizapp.model.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
+import com.tf8.quizapp.model.dto.QuestionDTO;
+
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
 /**
@@ -21,7 +32,7 @@ public class QuizEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	
-	@Column(nullable = false)
+	@Column(nullable = true)
 	private String title;
 
 	/**
@@ -30,14 +41,31 @@ public class QuizEntity {
 	 * 20 for the status 'RUNNING'
 	 * 30 for the status 'FINISHED'
 	 */
-	@Column(nullable = false)
-	private int status;
+	
+	/*
+	 * modifié par Ruben
+	 * type int en type integer pour accepter les valeurs NULL
+	 */
+	@Column(nullable = true)
+	private Integer status;
 
-	@Column(nullable = false)
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	@Column(nullable = true)
 	private Timestamp startQuestionTime;
 
-	@Column(nullable = false)
-	private int currentQuestionNumber;
+	/*
+	 * modifié par Ruben
+	 * type int en type integer pour accepter les valeurs NULL
+	 */
+	@Column(nullable = true)
+	private Integer currentQuestionNumber;
 
     /**
      * this attribute refers to what is displayed
@@ -46,8 +74,27 @@ public class QuizEntity {
      * 30 to display the answer
      * 40 to display the ranking of the players
      */
-	@Column(nullable = false)
-	private int step;
+	@Column(nullable = true)
+	private Integer step;
+	
+	//ajouté pour test
+	@ManyToMany()
+    @JoinTable(
+        name = "quiz_question", // Nom de la table de jointure
+        joinColumns = @JoinColumn(name = "quiz_id"), // Colonne de cette entité (Quiz) dans la table de jointure
+        inverseJoinColumns = @JoinColumn(name = "question_id") // Colonne de l'autre entité (Question)
+    )
+	private List<QuestionEntity> questionsList = new ArrayList<>();
+	
+	
+	public List<QuestionEntity> getQuestionsList() {
+		return questionsList;
+	}
+
+	public void setQuestionsList(List<QuestionEntity> questionsList) {
+		this.questionsList = questionsList;
+	}
+	
 	
 	/**
 	 * Getter of the quiz's title
@@ -69,7 +116,7 @@ public class QuizEntity {
 	 * Getter of the quiz's status
 	 * @return the quiz's status
 	 */
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 
@@ -77,7 +124,7 @@ public class QuizEntity {
 	 * Setter of the quiz's status
 	 * @param status the quiz's status
 	 */
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 
@@ -101,7 +148,7 @@ public class QuizEntity {
 	 * Getter of the number of the current question 
 	 * @return  the number of the current question 
 	 */
-	public int getCurrentQuestionNumber() {
+	public Integer getCurrentQuestionNumber() {
 		return currentQuestionNumber;
 	}
 
@@ -109,7 +156,7 @@ public class QuizEntity {
 	 * Setter of the number of the current question 
 	 * @param currentQuestionNumber number of the current question 
 	 */
-	public void setCurrentQuestionNumber(int currentQuestionNumber) {
+	public void setCurrentQuestionNumber(Integer currentQuestionNumber) {
 		this.currentQuestionNumber = currentQuestionNumber;
 	}
 
@@ -117,7 +164,7 @@ public class QuizEntity {
 	 * Getter of the question's step 
 	 * @return the question's step 
 	 */
-	public int getStep() {
+	public Integer getStep() {
 		return step;
 	}
 
@@ -125,7 +172,7 @@ public class QuizEntity {
 	 * Setter of the question's step 
 	 * @param step question's step
 	 */
-	public void setStep(int step) {
+	public void setStep(Integer step) {
 		this.step = step;
 	}
 }

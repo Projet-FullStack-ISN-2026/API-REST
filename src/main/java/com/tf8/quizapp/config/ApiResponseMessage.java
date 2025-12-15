@@ -2,7 +2,7 @@ package com.tf8.quizapp.config;
 
 import jakarta.xml.bind.annotation.XmlTransient;
 
-
+@jakarta.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2025-12-01T13:32:49.487155975Z[GMT]")
 @jakarta.xml.bind.annotation.XmlRootElement
 public class ApiResponseMessage {
     public static final int ERROR = 1;

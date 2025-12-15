@@ -7,27 +7,20 @@ public class OptionsDTO {
 
 	private Long id;
 	private String text;
+	
+	//A rajouter dans la DTO
 	private boolean isCorrect;
 
-	public OptionsDTO() {
-	}
-	
 	/**
-	 * Getter of the option's id
-	 * @return the option's id
+	 * Constructor without parameters
 	 */
-	public Long getId() {
-		return id;
+	public OptionsDTO() {
 	}
 
 	/**
 	 * Getter of the option's content
 	 * @return the content of the option
 	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
 	public String getText() {
 		return text;
 	}
@@ -40,17 +33,26 @@ public class OptionsDTO {
 		this.text = text;
 	}
 
+	/**
+	 * Getter of the option's id
+	 * @return the option's id
+	 */
+	public Long getId() {
+		return id;
+	}
+
 	public boolean isCorrect() {
 		return isCorrect;
 	}
 
-	public void setIsCorrect(boolean isCorrect) {
+	public void setCorrect(boolean isCorrect) {
 		this.isCorrect = isCorrect;
 	}
 
-	public boolean getIsCorrect() {
-		// TODO Auto-generated method stub
-		return false;
+	public void setId(Long id) {
+		this.id = id;
 	}
+	
+	
 
 }

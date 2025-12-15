@@ -1,117 +1,57 @@
 package com.tf8.quizapp.model.dto;
- 
-import jakarta.validation.constraints.Email;
-
-import jakarta.validation.constraints.NotBlank;
- 
 /**
-* @author DIENE Serigne Fallou
+* DTO utilisé pour renvoyer les données utilisateur au client REST (GET, POST réussi).
+* Il exclut les champs sensibles comme le mot de passe.
 */
-
 public class UserResponseDTO {
- 
-	private Long id;
-	private String email;
-	private String password;
-	private String lastName;
-	private String firstName;
-	private int role;
 
-	// Getters and Setters 
-	/**
-	 * Getter of the user's ID
-	 * @return User's ID
-	 */
-	public Long getId() {
-		return id;
-	}
+ private Long id;
+ private String email;
+ private String lastname;
+ private String firstname;
+ private int role; // Le rôle est souvent inclus pour les besoins de l'interface utilisateur.
 
-	/**
-	 * Setter of the user's ID
-	 * @param id User's ID
-	 */
-	public void setId(Long id) {
-		this.id = id;
-	}
+ // Note : Le champ 'password' est délibérément omis.
 
-	/**
-	 * Getter of the user's email 
-	 * @return User's email
-	 */
-	public String getEmail() {
-		return email;
-	}
+ // --- Getters et Setters ---
 
-	/**
-	 * Setter of the user's email 
-	 * @param email User's email 
-	 */
-	public void setEmail(String email) {
-		this.email = email;
-	}
+ public Long getId() {
+     return id;
+ }
 
-	/**
-	 * Getter of the user's password
-	 * @return User's password
-	 */
-	public String getPassword() {
-		return password;
-	}
+ public void setId(Long id) {
+     this.id = id;
+ }
 
-	/**
-	 * Setter of the user's password
-	 * @param password User's password
-	 */
-	public void setPassword(String password) {
-		this.password = password;
-	}
+ public String getEmail() {
+     return email;
+ }
 
-	/**
-	 * Getter of the user's Last name
-	 * @return User's Last name
-	 */
-	public String getLastName() {
-		return lastName;
-	}
+ public void setEmail(String email) {
+     this.email = email;
+ }
 
-	/**
-	 * Setter of the user's Last name
-	 * @param lastName User's Last name
-	 */
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
-	}
+ public String getLastname() {
+     return lastname;
+ }
 
-	/**
-	 * Getter of the user's first name
-	 * @return user's first name
-	 */
-	public String getFirstName() {
-		return firstName;
-	}
+ public void setLastname(String lastname) {
+     this.lastname = lastname;
+ }
 
-	/**
-	 * Setter of user's first name
-	 * @param firstName user's first name
-	 */
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
-	}
+ public String getFirstname() {
+     return firstname;
+ }
 
-	/**
-	 * Getter of user's role
-	 * @return user's role
-	 */
-	public int getRole() {
-		return role;
-	}
+ public void setFirstname(String firstname) {
+     this.firstname = firstname;
+ }
 
-	/**
-	 * Setter of user's role
-	 * @param role user's role
-	 */
-	public void setRole(int role) {
-		this.role = role;
-	}
+ public int getRole() {
+     return role;
+ }
+
+ public void setRole(int role) {
+     this.role = role;
+ }
 }
- 
