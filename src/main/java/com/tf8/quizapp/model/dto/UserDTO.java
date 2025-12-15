@@ -9,14 +9,18 @@ import jakarta.validation.constraints.NotBlank;
 */
 
 public class UserDTO {
- 
+	@NotBlank(message = "User's ID is required")
 	private Long id;
-	@NotBlank(message = "Email is required")
+	@NotBlank(message = "User'sEmail is required")
 	@Email(message = "Invalid email format")
 	private String email;
+	@NotBlank(message = "User'sPassword is required")
 	private String password;
+	@NotBlank(message = "User'sLastname is required")
 	private String lastname;
+	@NotBlank(message = "User'sFirstname is required")
 	private String firstname;
+	@NotBlank(message = "User's role is required")
 	private int role;
 
 	// Getters and Setters 

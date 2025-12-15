@@ -12,17 +12,21 @@ import jakarta.validation.constraints.NotNull;
 public class QuizDTO {
 	@NotNull(message = "Quiz ID is required")
 	private Long id;
+	@NotNull(message = "Quiz title is required")
 	private String title;
+	
 	/**
 	 * The status of the quiz
 	 * 10 for the status : 'NOT STARTED'
 	 * 20 for the status 'RUNNING'
 	 * 30 for the status 'FINISHED'
 	 */
+	@NotNull(message = "Quiz status is required")
 	private int status;
+	@NotNull(message = "Quiz statring time is required")
 	private Timestamp startQuestionTime;
+	@NotNull(message = "Quiz's current question number is required")
 	private int currentQuestionNumber;
-	
 	/**
 	 * this attribute fait référence à quoi est affiché
 	 * 10 to display a question
@@ -30,6 +34,7 @@ public class QuizDTO {
 	 * 30 to display the answer
 	 * 40 to display classement of the players
 	 */
+	@NotNull(message = "Quiz'step is required")
 	private int step;
 	private List<QuestionDTO> listQuestions= new ArrayList<>();
 	
@@ -40,6 +45,20 @@ public class QuizDTO {
 	 * Constructor
 	 */
 	public QuizDTO() {
+	}
+	/**
+	 * Gets the quiz ID.
+	 * @return the quiz's ID
+	 */
+	public Long getId() {
+		return id;
+	}
+	/**
+	 * Setter of the quiz's ID
+	 * @param id the quiz's ID
+	 */
+	public void setId(Long id) {
+		this.id=id;
 	}
 	/**
 	 * Gets the title.
@@ -56,7 +75,6 @@ public class QuizDTO {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	
 	/**
 	 * Gets the current status.
 	 * @return the status
@@ -64,7 +82,6 @@ public class QuizDTO {
 	public int getStatus() {
 		return status;
 	}
-	
 	/**
 	 * Sets the status.
 	 * @param status the new status to set
@@ -72,15 +89,13 @@ public class QuizDTO {
 	public void setStatus(int status) {
 		this.status = status;
 	}
-	
 	/**
 	 * Gets the timestamp when the question started.
 	 * @return the start question time
 	 */
 	public Timestamp getStartQuestionTime() {
 		return startQuestionTime;
-	}
-	
+	}	
 	/**
 	 * Sets the timestamp for when the question started.
 	 * @param startQuestionTime the start question time to set
@@ -88,7 +103,6 @@ public class QuizDTO {
 	public void setStartQuestionTime(Timestamp startQuestionTime) {
 		this.startQuestionTime = startQuestionTime;
 	}
-	
 	/**
 	 * Gets the number of the current question.
 	 * @return the current question number
@@ -96,7 +110,6 @@ public class QuizDTO {
 	public int getCurrentQuestionNumber() {
 		return currentQuestionNumber;
 	}
-	
 	/**
 	 * Sets the number of the current question.
 	 * @param currentQuestionNumber the current question number to set
@@ -104,7 +117,6 @@ public class QuizDTO {
 	public void setCurrentQuestionNumber(int currentQuestionNumber) {
 		this.currentQuestionNumber = currentQuestionNumber;
 	}
-	
 	/**
 	 * Gets the current step.
 	 * @return the step
@@ -112,7 +124,6 @@ public class QuizDTO {
 	public int getStep() {
 		return step;
 	}
-	
 	/**
 	 * Sets the current step.
 	 * @param step the new step to set
@@ -120,25 +131,17 @@ public class QuizDTO {
 	public void setStep(int step) {
 		this.step = step;
 	}
-	
 	/**
-	 * Gets the quiz ID.
-	 * @return the quiz's ID
-	 */
-	public Long getId() {
-		return id;
-	}
-	/**
-	 * gets the questions' list
+	 * Getter of the quiz's questions list
+	 * @return the quiz's questions list
 	 */
 	public ArrayList<QuestionDTO> getQuestionList() {
 	    return new ArrayList<>(this.listQuestions);
 	}
-
-	
-	public void setId(Long id) {
-		this.id=id;
-	}
+	/**
+	 * Setter of the quiz's questions list
+	 * @param questionList the new quiz's questions list
+	 */
 	public void setQuestionList(List<QuestionDTO> questionList) {
 	    if (questionList == null) {
 	        this.listQuestions = new ArrayList<>();

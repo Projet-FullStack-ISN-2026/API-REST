@@ -21,23 +21,6 @@ public class QuestionDTO {
 	 */
 	public QuestionDTO() {
 	}
-
-	/**
-	 * Getter of the question
-	 * @return the question
-	 */
-	public String getQuestion() {
-		return question;
-	}
-
-	/**
-	 * Setter of the question
-	 * @param question
-	 */
-	public void setQuestion(String question) {
-		this.question = question;
-	}
-
 	/**
 	 * Getter of the question's ID
 	 * @return the question's ID
@@ -53,10 +36,32 @@ public class QuestionDTO {
 		this.id = id;
 	}
 	
+	/**
+	 * Getter of the question
+	 * @return the question
+	 */
+	public String getQuestion() {
+		return question;
+	}
+
+	/**
+	 * Setter of the question
+	 * @param question
+	 */
+	public void setQuestion(String question) {
+		this.question = question;
+	}
+	/**
+	 * Getter of the question's options
+	 * @return
+	 */
 	public ArrayList<OptionsDTO> getOptions() {
 	    return new ArrayList<>(this.options);
 	}
-
+	/**
+	 * Setter of the question(s options
+	 * @param options the new options list
+	 */
 	public void setOptions(List<OptionsDTO> options) {
 	    if (options == null) {
 	        this.options = new ArrayList<>();
