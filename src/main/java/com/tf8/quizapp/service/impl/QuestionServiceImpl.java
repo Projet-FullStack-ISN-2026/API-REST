@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -72,12 +73,28 @@ public class QuestionServiceImpl implements QuestionService {
                 OptionsDTO optDto = new OptionsDTO();
                 optDto.setId(optEntity.getId());
                 optDto.setText(optEntity.getText());
-                optDto.setCorrect(optEntity.getIsCorrect());
+                optDto.setIsCorrect(optEntity.getIsCorrect());
                 return optDto;
             }).collect(Collectors.toList());
             dto.setOptions(optionsDtos);
         }
         
         return dto;
+    }
+    
+    @Override
+    @Transactional
+    public QuestionDTO getQuestion (Long id) {
+    	Optional<QuestionEntity> questionEntity = questionRepository.findById(id);
+ 
+        // 2. Vérifier si l'entité existe
+    	if (questionEntity.isPresent()) {
+            // 3. Mapper l'entité trouvée en DTO et la retourner
+    		return mapToDTO(questionEntity.get());
+    	} else {
+            // 4. Si la question n'est pas trouvée, retourner null ou,
+            //    mieux, lancer une exception personnalisée (non implémentée ici)
+    		return null;
+    	}
     }
 }

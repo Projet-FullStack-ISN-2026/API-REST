@@ -37,4 +37,13 @@ public class QuestionsApiController {
         QuestionDTO createdQuestion = questionService.createQuestion(questionDTO);
         return new ResponseEntity<>(createdQuestion, HttpStatus.CREATED);
     }
+    
+    @GetMapping
+    @RequestMapping("/{id}")
+    public ResponseEntity<QuestionDTO> questionsQuestionIdGet( @PathVariable  Long id) {
+    		        
+    	QuestionDTO response = questionService.getQuestion(id);
+		return new ResponseEntity<QuestionDTO>(response, HttpStatus.OK);            
+        
+    }
 }

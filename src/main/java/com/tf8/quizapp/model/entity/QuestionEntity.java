@@ -31,6 +31,14 @@ public class QuestionEntity {
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
     private List<OptionsEntity> options;
 	
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	/**
 	 * Getter of the question content
 	 * @return the question content
@@ -45,14 +53,6 @@ public class QuestionEntity {
 	 */
 	public void setQuestion(String question) {
 		this.question = question;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 
 	public List<OptionsEntity> getOptions() {

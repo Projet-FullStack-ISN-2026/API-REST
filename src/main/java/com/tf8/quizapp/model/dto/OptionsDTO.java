@@ -16,11 +16,25 @@ public class OptionsDTO {
 	 */
 	public OptionsDTO() {
 	}
+	
+	/**
+	 * Getter of the option's id
+	 * @return the option's id
+	 */
+	public Long getId() {
+		return id;
+	}
 
 	/**
 	 * Getter of the option's content
 	 * @return the content of the option
 	 */
+	
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
 	public String getText() {
 		return text;
 	}
@@ -33,24 +47,12 @@ public class OptionsDTO {
 		this.text = text;
 	}
 
-	/**
-	 * Getter of the option's id
-	 * @return the option's id
-	 */
-	public Long getId() {
-		return id;
-	}
-
 	public boolean isCorrect() {
 		return isCorrect;
 	}
 
-	public void setCorrect(boolean isCorrect) {
+	public void setIsCorrect(boolean isCorrect) {
 		this.isCorrect = isCorrect;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
 	}
 	
 	

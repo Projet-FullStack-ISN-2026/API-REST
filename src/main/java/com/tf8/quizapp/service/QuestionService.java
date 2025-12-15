@@ -10,4 +10,6 @@ public interface QuestionService {
 
     // Récupérer toutes les questions
     List<QuestionDTO> getAllQuestions();
+
+	QuestionDTO getQuestion(Long id);
 }
