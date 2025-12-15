@@ -53,4 +53,9 @@ public class QuestionDTO {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public OptionsDTO[] getOptions() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

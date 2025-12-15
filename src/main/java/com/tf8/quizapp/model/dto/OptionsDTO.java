@@ -48,4 +48,9 @@ public class OptionsDTO {
 		
 	}
 
+	public boolean getIsCorrect() {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
 }

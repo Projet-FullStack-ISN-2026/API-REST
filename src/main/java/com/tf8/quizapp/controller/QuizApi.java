@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -281,47 +282,119 @@ public interface QuizApi {
 @Validated
 public interface QuizApi {
 	
-	@Operation(summary = "GetAllQuiz")
+	// ================================================================================
+    // 1. GESTION DES QUIZ (CRUD)
+    // ================================================================================
+
+    @Operation(summary = "Lister tous les quiz")
     @RequestMapping(value = "/quiz", method = RequestMethod.GET)
     ResponseEntity<?> listQuiz();
 
-    @Operation(summary = "CreateQuiz")
+    @Operation(summary = "Créer un nouveau quiz")
     @RequestMapping(value = "/quiz", method = RequestMethod.POST)
     ResponseEntity<?> addQuiz(@Valid @RequestBody QuizDTO body);
 
-	@Operation(summary = "GetQuiz")
+    @Operation(summary = "Obtenir les détails d'un quiz")
     @RequestMapping(value = "/quiz/{quizId}", method = RequestMethod.GET)
-    ResponseEntity<?> getQuiz(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId);
-	
-	@Operation(summary = "ModifyQuiz")
+    ResponseEntity<?> getQuiz(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    @Operation(summary = "Mettre à jour un quiz")
     @RequestMapping(value = "/quiz/{quizId}", method = RequestMethod.PUT)
     ResponseEntity<?> modifyQuiz(
-		@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId,
-    	@Parameter(in = ParameterIn.DEFAULT, required=true) @Valid @RequestBody QuizDTO body
-	);
-	
-	@Operation(summary = "DeleteQuiz")
-    @RequestMapping(value = "/quiz/{quizId}", method = RequestMethod.DELETE)
-    ResponseEntity<?> deleteQuiz(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId);
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId,
+            @Valid @RequestBody QuizDTO body
+    );
 
-	@Operation(summary = "GetQuizQuestions")
-    @RequestMapping(value = "/quiz/{quizId}/questions", method = RequestMethod.GET)
-    ResponseEntity<?> getQuizQuestions(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId);
-	
+    @Operation(summary = "Supprimer un quiz")
+    @RequestMapping(value = "/quiz/{quizId}", method = RequestMethod.DELETE)
+    ResponseEntity<?> deleteQuiz(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
 	@Operation(summary = "LinkQuizQuestions")
     @RequestMapping(value = "/quiz/{quizId}/questions", method = RequestMethod.POST)
     ResponseEntity<?> linkQuizQuestions(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId);
 	
-	@Operation(summary = "UnlinkQuizQuestions")
-    @RequestMapping(value = "/quiz/{quizId}/questions", method = RequestMethod.DELETE)
-    ResponseEntity<?> unlinkQuizQuestions(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId);
+    @Operation(summary = "Lister les questions du quiz")
+    @RequestMapping(value = "/quiz/{quizId}/questions", method = RequestMethod.GET)
+    ResponseEntity<?> getQuizQuestions(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
 
-	@Operation(summary = "LaunchQuiz")
+
+    @Operation(summary = "Délier une question du quiz")
+    @RequestMapping(value = "/quiz/{quizId}/questions/{questionId}", method = RequestMethod.DELETE)
+    ResponseEntity<?> unlinkQuizQuestions(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId,
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("questionId") Long questionId
+    );
+
+    // ================================================================================
+    // 3. CONTRÔLE DU QUIZ (Admin/Animateur)
+    // ================================================================================
+
+    @Operation(summary = "Démarrer le quiz")
     @RequestMapping(value = "/quiz/{quizId}/control/start", method = RequestMethod.POST)
-    ResponseEntity<?> launchQuiz(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId);
-	
-	@Operation(summary = "FinishQuiz")
+    ResponseEntity<?> launchQuiz(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    @Operation(summary = "Terminer le quiz")
     @RequestMapping(value = "/quiz/{quizId}/control/finish", method = RequestMethod.POST)
-    ResponseEntity<?> finishQuiz(@Parameter(in = ParameterIn.PATH, required=true) @PathVariable("quizId") Long quizId);
-	
+    ResponseEntity<?> finishQuiz(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    // ================================================================================
+    // 4. JEU & PILOTAGE LIVE (Joueurs & Animateur)
+    // ================================================================================
+
+    @Operation(summary = "Rejoindre la partie")
+    @RequestMapping(value = "/quiz/{quizId}/join", method = RequestMethod.POST)
+    ResponseEntity<?> joinQuiz(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    @Operation(summary = "Obtenir le statut du Lobby (Admin)")
+    @RequestMapping(value = "/quiz/{quizId}/admin/status", method = RequestMethod.GET)
+    ResponseEntity<?> getQuizLobbyStatus(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    @Operation(summary = "Obtenir la question active")
+    @RequestMapping(value = "/quiz/{quizId}/play/current-question", method = RequestMethod.GET)
+    ResponseEntity<?> getCurrentQuestion(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    @Operation(summary = "Obtenir la prochaine question (Admin)")
+    @RequestMapping(value = "/quiz/{quizId}/play/next-question", method = RequestMethod.GET)
+    ResponseEntity<?> getNextQuestion(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    @Operation(summary = "Soumettre une réponse")
+    @RequestMapping(value = "/quiz/{quizId}/play/answer", method = RequestMethod.POST)
+    ResponseEntity<?> submitAnswer(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    @Operation(summary = "Consulter le classement")
+    @RequestMapping(value = "/quiz/{quizId}/play/leaderboard", method = RequestMethod.GET)
+    ResponseEntity<?> getLeaderboard(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    @Operation(summary = "Récupérer les stats (Admin)")
+    @RequestMapping(value = "/quiz/{quizId}/admin/stats", method = RequestMethod.GET)
+    ResponseEntity<?> getQuizStats(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
+
+    @Operation(summary = "Récupérer la bonne réponse (Admin)")
+    @RequestMapping(value = "/quiz/{quizId}/admin/answer", method = RequestMethod.GET)
+    ResponseEntity<?> getCorrectAnswer(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("quizId") Long quizId
+    );
 }

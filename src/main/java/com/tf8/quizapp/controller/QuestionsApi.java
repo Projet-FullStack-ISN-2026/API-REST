@@ -5,6 +5,20 @@
  */
 package com.tf8.quizapp.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import com.tf8.quizapp.model.dto.QuestionDTO;
+
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import jakarta.validation.Valid;
+
 /*import com.tf8.quizapp.model.dto.QuestionCreate;
 import com.tf8.quizapp.model.dto.QuestionDetailed;
 import io.swagger.v3.oas.annotations.Operation;
@@ -105,3 +119,33 @@ public interface QuestionsApi {
 
 }*/
 
+@Validated
+public interface QuestionsApi {
+	@Operation(summary = "Lister toutes les questions de la banque")
+    @RequestMapping(value = "/questions", method = RequestMethod.GET)
+    ResponseEntity<?> listAllQuestions();
+
+    @Operation(summary = "Créer une nouvelle question dans la banque")
+    @RequestMapping(value = "/questions", method = RequestMethod.POST)
+    ResponseEntity<?> createQuestion(@Valid @RequestBody QuestionDTO body);
+
+    @Operation(summary = "Obtenir les détails d'une question")
+    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.GET)
+    ResponseEntity<?> getQuestion(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("questionId") Long questionId
+    );
+
+    @Operation(summary = "Modifier une question dans la banque")
+    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.PUT)
+    ResponseEntity<?> modifyQuestion(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("questionId") Long questionId,
+            @Valid @RequestBody QuestionDTO body
+    );
+
+    @Operation(summary = "Supprimer une question de la banque")
+    @RequestMapping(value = "/questions/{questionId}", method = RequestMethod.DELETE)
+    ResponseEntity<?> deleteQuestion(
+            @Parameter(in = ParameterIn.PATH, required = true) @PathVariable("questionId") Long questionId
+    );
+	
+}
