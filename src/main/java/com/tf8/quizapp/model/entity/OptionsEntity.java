@@ -28,7 +28,13 @@ public class OptionsEntity {
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "question_id")
 	private QuestionEntity question;
-	
+	public Long getId() {
+	    return this.id;
+	 }
+	public void setId(Long id)
+	{
+	  this.id=id;
+	}
 	/**
 	 * Getter of the Option's content
 	 * @return the Option's content
@@ -43,27 +49,36 @@ public class OptionsEntity {
 	public void setText(String text) {
 		this.text = text;
 	}
+	/**
+	 * Getter of isCorrect
+	 * @return true or false
+	 */
 	public Boolean getIsCorrect() {
         return isCorrect;
     }
+	/**
+	 * Setter of isCorrect
+	 * @param isCorrect option's status
+	 */
     public void setIsCorrect(Boolean isCorrect) {
         this.isCorrect = isCorrect;
     }
-
+    /**
+     * Getter of the question
+     * @return the question
+     */
     public QuestionEntity getQuestion() {
         return question;
     }
+    /**
+     * Setter of the question
+     * @param question the question
+     */
     public void setQuestion(QuestionEntity question) {
         this.question = question;
     }
     
-    public Long getId() {
-    	return this.id;
-    }
-    public void setId(Long id)
-    {
-    	this.id=id;
-    }
+   
 }
  
  
