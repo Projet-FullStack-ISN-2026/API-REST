@@ -1,4 +1,5 @@
 package com.tf8.quizapp.controller;
+package com.tf8.quizapp.controller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,39 +16,53 @@ import jakarta.validation.Valid;
 
 /*import com.fasterxml.jackson.databind.ObjectMapper;
 
-import com.tf8.quizapp.model.dto.QuestionCreate;
-import com.tf8.quizapp.model.dto.QuestionDetailed;
-import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.Parameter;
-import io.swagger.v3.oas.annotations.enums.ParameterIn;
-import io.swagger.v3.oas.annotations.responses.ApiResponses;
-import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
-import io.swagger.v3.oas.annotations.media.Content;
-import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.tf8.quizapp.model.dto.QuestionDTO;
+import com.tf8.quizapp.service.QuestionService;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.CookieValue;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.*;
 
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.*;
-import jakarta.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @RestController
+@RequestMapping("/questions") // Définit l'URL de base pour ce contrôleur
+public class QuestionsApiController {
+
+    private final QuestionService questionService;
+
+    // Injection du service
+    public QuestionsApiController(QuestionService questionService) {
+        this.questionService = questionService;
+    }
+
+    /**
+     * GET /questions : Récupère la liste de toutes les questions
+     */
+    @GetMapping
+    public ResponseEntity<List<QuestionDTO>> getAllQuestions() {
+        List<QuestionDTO> questions = questionService.getAllQuestions();
+        return ResponseEntity.ok(questions);
+    }
+
+    /**
+     * POST /questions : Crée une nouvelle question
+     */
+    @PostMapping
+    public ResponseEntity<QuestionDTO> createQuestion(@Valid @RequestBody QuestionDTO questionDTO) {
+        QuestionDTO createdQuestion = questionService.createQuestion(questionDTO);
+        return new ResponseEntity<>(createdQuestion, HttpStatus.CREATED);
+    }
+    
+    @GetMapping
+    @RequestMapping("/{id}")
+    public ResponseEntity<QuestionDTO> questionsQuestionIdGet( @PathVariable  Long id) {
+    		        
+    	QuestionDTO response = questionService.getQuestion(id);
+		return new ResponseEntity<QuestionDTO>(response, HttpStatus.OK);            
+        
+    }
+}
 public class QuestionsApiController implements QuestionsApi {
 
     private static final Logger log = LoggerFactory.getLogger(QuestionsApiController.class);
