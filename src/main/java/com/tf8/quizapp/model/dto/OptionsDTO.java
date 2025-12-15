@@ -41,18 +41,14 @@ public class OptionsDTO {
 		return id;
 	}
 
-	public boolean isCorrect() {
-		return isCorrect;
+	public void setId(long l) {
+		this.id=l;
+		
 	}
 
-	public void setCorrect(boolean isCorrect) {
-		this.isCorrect = isCorrect;
+	public void setIsCorrect(boolean b) {
+		
+		
 	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-	
-	
 
 }
