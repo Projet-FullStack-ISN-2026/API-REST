@@ -36,8 +36,8 @@ public class ChooseEntity {
 	 * Constructor without parameters
 	 */
 	public ChooseEntity() {
-	}
 
+	}
 	/**
 	 * Getter of the ID
 	 * @return ID
@@ -45,15 +45,13 @@ public class ChooseEntity {
 	public Long getId() {
 		return id;
 	}
-
 	/**
 	 * Setter of the ID
-	 * @param id ID
+	 * @param ID
 	 */
 	public void setId(Long id) {
 		this.id = id;
 	}
-
 	/**
 	 * Getter of the date
 	 * @return date
@@ -61,15 +59,13 @@ public class ChooseEntity {
 	public Timestamp getDate() {
 		return date;
 	}
-
 	/**
 	 * Setter of the date
-	 * @param date Timestamp date
+	 * @param text the content of the option
 	 */
 	public void setDate(Timestamp date) {
 		this.date = date;
 	}
-
 	/**
 	 * Getter of the user object
 	 * @return USER
@@ -77,15 +73,13 @@ public class ChooseEntity {
 	public UserEntity getUser() {
 		return user;
 	}
-
 	/**
 	 * Setter of the USER object
-	 * @param user UserEntity object
+	 * @param UserEntity object
 	 */
 	public void setUser(UserEntity user) {
 		this.user = user;
 	}
-
 	/**
 	 * Getter of the Option object
 	 * @return Option
@@ -93,15 +87,13 @@ public class ChooseEntity {
 	public OptionsEntity getOption() {
 		return option;
 	}
-
 	/**
 	 * Setter of the Option object
-	 * @param option OptionEntity object
+	 * @param OptionEntity object
 	 */
 	public void setOption(OptionsEntity option) {
 		this.option = option;
 	}
-
 	/**
 	 * Getter of the QuizEntity object
 	 * @return QuizEntity object
@@ -109,10 +101,9 @@ public class ChooseEntity {
 	public QuizEntity getQuiz() {
 		return quiz;
 	}
-
 	/**
 	 * Setter of the Quiz object
-	 * @param quiz QuizEntity object
+	 * @param QuizEntity object
 	 */
 	public void setQuiz(QuizEntity quiz) {
 		this.quiz = quiz;

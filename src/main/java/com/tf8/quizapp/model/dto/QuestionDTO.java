@@ -1,5 +1,8 @@
 package com.tf8.quizapp.model.dto;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.validation.constraints.NotNull;
 
 /**
@@ -11,6 +14,7 @@ public class QuestionDTO {
 	private Long id;
 	@NotNull(message = "The question content is required")
 	private String question;
+	private List<OptionsDTO> options = new ArrayList<>();
 
 	/**
 	 * Constructor without parameters
@@ -41,4 +45,24 @@ public class QuestionDTO {
 	public Long getId() {
 		return id;
 	}
+	/**
+	 * Setter of the option's id
+	 * @param id the option's id
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+	
+	public ArrayList<OptionsDTO> getOptions() {
+	    return new ArrayList<>(this.options);
+	}
+
+	public void setOptions(List<OptionsDTO> options) {
+	    if (options == null) {
+	        this.options = new ArrayList<>();
+	    } else {
+	        this.options = new ArrayList<>(options);
+	    }
+	}
+
 }

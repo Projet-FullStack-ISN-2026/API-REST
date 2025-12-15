@@ -1,6 +1,8 @@
  package com.tf8.quizapp.model.dto;
  
-import java.security.Timestamp;
+import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 import jakarta.validation.constraints.NotNull;
  
@@ -29,7 +31,16 @@ public class QuizDTO {
 	 * 40 to display classement of the players
 	 */
 	private int step;
+	private List<QuestionDTO> listQuestions= new ArrayList<>();
 	
+	public List<QuestionDTO> getListQuestions() {
+		return listQuestions;
+	}
+	/**
+	 * Constructor
+	 */
+	public QuizDTO() {
+	}
 	/**
 	 * Gets the title.
 	 * @return the title
@@ -117,6 +128,25 @@ public class QuizDTO {
 	public Long getId() {
 		return id;
 	}
+	/**
+	 * gets the questions' list
+	 */
+	public ArrayList<QuestionDTO> getQuestionList() {
+	    return new ArrayList<>(this.listQuestions);
+	}
+
+	
+	public void setId(Long id) {
+		this.id=id;
+	}
+	public void setQuestionList(List<QuestionDTO> questionList) {
+	    if (questionList == null) {
+	        this.listQuestions = new ArrayList<>();
+	    } else {
+	        this.listQuestions = new ArrayList<>(questionList);
+	    }
+	}
+
 }
  
  

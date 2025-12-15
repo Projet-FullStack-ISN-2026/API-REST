@@ -7,6 +7,7 @@ public class OptionsDTO {
 
 	private Long id;
 	private String text;
+	private boolean isCorrect;
 
 	/**
 	 * Constructor without parameters
@@ -36,6 +37,22 @@ public class OptionsDTO {
 	 */
 	public Long getId() {
 		return id;
+	}
+
+	/**
+	 * Setter of the option's id
+	 * @param id the option's id
+	 */
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Boolean getIsCorrect() {
+		return isCorrect;
+	}
+
+	public void setIsCorrect(Boolean isCorrect) {
+		this.isCorrect = isCorrect;
 	}
 
 }
