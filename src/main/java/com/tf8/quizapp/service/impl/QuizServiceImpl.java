@@ -70,14 +70,50 @@ public class QuizServiceImpl implements QuizService {
 	
 	 
 	 @Override
+    @Transactional
+    public QuizDetailDTO quizQuizIdGetDetail (Long id) {
+    	Optional<QuizEntity> quizEntity = quizRepository.findById(id);
+
+        // 2. Vérifier si l'entité existe
+    	if (quizEntity.isPresent()) {
+            // 3. Mapper l'entité trouvée en DTO et la retourner
+    		return mapToDetailDTO(quizEntity.get());
+    	} else {
+            // 4. Si la question n'est pas trouvée, retourner null ou, 
+            //    mieux, lancer une exception personnalisée (non implémentée ici)
+    		return null; 
+    	}
+    }
+	 
+	 @Override
 	    @Transactional
-	    public QuizDetailDTO quizQuizIdGetDetail (Long id) {
+	    public QuizDTO quizStart (Long id) {
 	    	Optional<QuizEntity> quizEntity = quizRepository.findById(id);
 
 	        // 2. Vérifier si l'entité existe
 	    	if (quizEntity.isPresent()) {
-	            // 3. Mapper l'entité trouvée en DTO et la retourner
-	    		return mapToDetailDTO(quizEntity.get());
+	    		QuizEntity quiz = quizEntity.get();
+	    		quiz.setStatus(20);
+	    		QuizEntity updatedQuiz = quizRepository.save(quiz);
+	    		return mapToDTO(updatedQuiz);
+	    	} else {
+	            // 4. Si la question n'est pas trouvée, retourner null ou, 
+	            //    mieux, lancer une exception personnalisée (non implémentée ici)
+	    		return null; 
+	    	}
+	    }
+	 
+	 @Override
+	    @Transactional
+	    public QuizDTO quizFinish (Long id) {
+	    	Optional<QuizEntity> quizEntity = quizRepository.findById(id);
+
+	        // 2. Vérifier si l'entité existe
+	    	if (quizEntity.isPresent()) {
+	    		QuizEntity quiz = quizEntity.get();
+	    		quiz.setStatus(30);
+	    		QuizEntity updatedQuiz = quizRepository.save(quiz);
+	    		return mapToDTO(updatedQuiz);
 	    	} else {
 	            // 4. Si la question n'est pas trouvée, retourner null ou, 
 	            //    mieux, lancer une exception personnalisée (non implémentée ici)

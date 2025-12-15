@@ -49,7 +49,17 @@ public class QuizApiController {
 		return (QuizDetailDTO) quizService.quizQuizIdGetDetail(id);
 	}
 	
+	@RequestMapping("/{id}/control/start") 
+	@PostMapping()
+	public QuizDTO quizStart(@PathVariable Long id) {
+		return quizService.quizStart(id);
+	}
 	
+	@RequestMapping("/{id}/control/finish") 
+	@PostMapping()
+	public QuizDTO quizFinish(@PathVariable Long id) {
+		return quizService.quizFinish(id);
+	}
 	
 	@PostMapping()
 	public QuizEntity quizPost(@RequestBody QuizEntity body) {
