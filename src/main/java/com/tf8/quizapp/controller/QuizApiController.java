@@ -1,6 +1,20 @@
-/*package com.tf8.quizapp.controller;
+package com.tf8.quizapp.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.time.OffsetDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.tf8.quizapp.model.dto.*;
+import com.tf8.quizapp.model.entity.QuizEntity;
+
+import jakarta.validation.Valid;
+
+/*import com.fasterxml.jackson.databind.ObjectMapper;
 
 import com.tf8.quizapp.model.dto.AnswerSubmit;
 import com.tf8.quizapp.model.dto.Leaderboard;
@@ -258,3 +272,142 @@ public class QuizApiController implements QuizApi {
     }
 
 }*/
+
+
+@RestController
+public class QuizApiController implements QuizApi {
+
+	@Override
+    public ResponseEntity<?> listQuiz() {
+        // Mock : Une liste de 2 quiz simples
+        QuizDTO quiz1 = new QuizDTO();
+        quiz1.setId(1L);
+        quiz1.setTitle("Quiz de Culture Générale");
+        quiz1.setStatus(10); // Not started
+
+        QuizDTO quiz2 = new QuizDTO();
+        quiz2.setId(2L);
+        quiz2.setTitle("Quiz de Géographie");
+        quiz2.setStatus(20); // Running
+
+        return ResponseEntity.ok(Arrays.asList(quiz1, quiz2));
+    }
+
+    // --- 2. AJOUTER UN QUIZ ---
+    @Override
+    public ResponseEntity<?> addQuiz(@Valid QuizDTO body) {
+        // Mock : On renvoie l'objet reçu avec un ID généré
+    	QuizDTO createdQuiz = new QuizDTO();
+        createdQuiz.setId(101L); // ID simulé
+        createdQuiz.setTitle(body.getTitle());
+        createdQuiz.setStatus(10);
+        createdQuiz.setQuestions(new ArrayList<>()); // Liste vide au début
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(createdQuiz);
+    }
+
+    // --- 3. OBTENIR UN QUIZ (DÉTAILLÉ) ---
+    @Override
+    public ResponseEntity<?> getQuiz(Long quizId) {
+        // Mock : Un quiz complet avec une question et des options
+    	QuizDTO quiz = new QuizDTO();
+        quiz.setId(quizId);
+        quiz.setTitle("Quiz Complet Mocké");
+        quiz.setStatus(10);
+
+        // Création d'une question mockée
+        QuestionDTO question = new QuestionDTO();
+        question.setId(50L);
+        question.setQuestion("Quelle est la capitale de la France ?");
+        
+        // Options
+        OptionsDTO opt1 = new OptionsDTO();
+        opt1.setId(1L); opt1.setText("Paris"); opt1.setIsCorrect(true);
+        
+        OptionsDTO opt2 = new OptionsDTO();
+        opt2.setId(2L); opt2.setText("Berlin"); opt2.setIsCorrect(false);
+
+        question.setOptions(Arrays.asList(opt1, opt2));
+        quiz.setQuestions((ArrayList) Arrays.asList(question));
+
+        return ResponseEntity.ok(quiz);
+    }
+
+    // --- 4. MODIFIER UN QUIZ ---
+    @Override
+    public ResponseEntity<?> modifyQuiz(Long quizId, @Valid QuizDTO body) {
+        // Mock : On renvoie le quiz avec le nouveau titre
+        QuizDTO updatedQuiz = new QuizDTO();
+        updatedQuiz.setId(quizId);
+        updatedQuiz.setTitle(body.getTitle()); // Titre modifié
+        updatedQuiz.setStatus(10);
+        updatedQuiz.setQuestions(new ArrayList<>());
+
+        return ResponseEntity.ok(updatedQuiz);
+    }
+
+    // --- 5. SUPPRIMER UN QUIZ ---
+    @Override
+    public ResponseEntity<?> deleteQuiz(Long quizId) {
+        // Mock : Pas de contenu (204) pour dire que c'est bien supprimé
+        return ResponseEntity.noContent().build();
+    }
+
+    // --- 6. OBTENIR LES QUESTIONS D'UN QUIZ ---
+    @Override
+    public ResponseEntity<?> getQuizQuestions(Long quizId) {
+        // Mock : Liste de questions
+        QuestionDTO q1 = new QuestionDTO();
+        q1.setId(10L);
+        q1.setQuestion("Question A");
+        
+        QuestionDTO q2 = new QuestionDTO();
+        q2.setId(11L);
+        q2.setQuestion("Question B");
+
+        return ResponseEntity.ok(Arrays.asList(q1, q2));
+    }
+
+    // --- 7. LIER DES QUESTIONS ---
+    @Override
+    public ResponseEntity<?> linkQuizQuestions(Long quizId) {
+        // Mock : On suppose qu'on reçoit un ID de question et on renvoie le quiz mis à jour
+        // Simplification : on renvoie juste un 200 OK ou le quiz detail
+        return getQuiz(quizId); // Réutilise le mock getQuiz
+    }
+
+    // --- 8. DÉLIER DES QUESTIONS ---
+    @Override
+    public ResponseEntity<?> unlinkQuizQuestions(Long quizId) {
+        // Mock : 204 No Content
+        return ResponseEntity.noContent().build();
+    }
+
+    // --- 9. LANCER LE QUIZ (Start) ---
+    @Override
+    public ResponseEntity<?> launchQuiz(Long quizId) {
+        // Mock : État qui passe à RUNNING (20)
+        QuizDTO state = new QuizDTO();
+        state.setId(quizId);
+        state.setStatus(20); // Running
+        state.setCurrentQuestionNumber(1);
+        state.setStep(10); // Display Question
+        state.setStartQuestionTime(OffsetDateTime.now()); // Heure actuelle
+
+        return ResponseEntity.ok(state);
+    }
+
+    // --- 10. TERMINER LE QUIZ (Finish) ---
+    @Override
+    public ResponseEntity<?> finishQuiz(Long quizId) {
+        // Mock : État qui passe à FINISHED (30)
+        QuizDTO state = new QuizDTO();
+        state.setId(quizId);
+        state.setStatus(30); // Finished
+        state.setCurrentQuestionNumber(0);
+        state.setStep(0);
+        
+        return ResponseEntity.ok(state);
+    }
+	
+}

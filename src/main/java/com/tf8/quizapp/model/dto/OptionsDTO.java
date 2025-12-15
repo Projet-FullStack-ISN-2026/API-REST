@@ -47,6 +47,7 @@ public class OptionsDTO {
 		this.text = text;
 	}
 
+<<<<<<< HEAD
 	public boolean isCorrect() {
 		return isCorrect;
 	}
@@ -56,5 +57,24 @@ public class OptionsDTO {
 	}
 	
 	
+=======
+	/**
+	 * Getter of the option's id
+	 * @return the option's id
+	 */
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(long l) {
+		this.id=l;
+		
+	}
+
+	public void setIsCorrect(boolean b) {
+		
+		
+	}
+>>>>>>> b56773d2c37ede849515704164b7fc04d01e78ab
 
 }
