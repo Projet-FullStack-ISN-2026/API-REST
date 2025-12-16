@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
 import com.tf8.quizapp.model.dto.QuizDetailDTO;
+import com.tf8.quizapp.model.entity.ChooseEntity;
 import com.tf8.quizapp.model.entity.QuizEntity;
 
 import com.tf8.quizapp.service.impl.QuizServiceImpl;
@@ -66,6 +67,34 @@ public class QuizApiController {
 		return quizService.quizPost(body);
 	}
 	
+	
+    
+	@RequestMapping("/{quizId}/play/current-question") 
+    @GetMapping()
+    public QuestionDTO currentQuestion(@PathVariable Long quizId) {
+    	return quizService.getCurrentQuestion(quizId);
+    }
+    
+	@RequestMapping("/{quizId}/play/next-question") 
+    @GetMapping("/quiz/{quizId}/play/next-question")
+    public QuestionDTO nextQuestion(@PathVariable Long quizId) {
+    	return quizService.getNextQuestion(quizId);
+    }
+    /*
+	@RequestMapping("/{quizId}/play/leaderboard") 
+    @GetMapping()
+    public List<ClassementDTO> getClassement(@PathVariable Long quizId) {
+    	return quizService.getClassement(quizId);
+    }
+	@RequestMapping("/{quizId}/user/{userId}/option/{optionId}/answer") 
+	@PostMapping()
+    public ChooseEntity answerQuiz(
+        @PathVariable Long quizId,
+        @PathVariable Long userId,
+        @PathVariable Long optionId
+    ) {
+        return quizService.saveAnswer(quizId, userId, optionId);
+    }*/
 	
 	
 }

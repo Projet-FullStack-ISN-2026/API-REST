@@ -120,6 +120,56 @@ public class QuizServiceImpl implements QuizService {
 	    		return null; 
 	    	}
 	    }
+	 
+	 
+	 @Override
+	    @Transactional
+		public QuestionDTO getCurrentQuestion(Long id) {
+		 Optional<QuizEntity> quizEntity = quizRepository.findById(id);
+
+	        // 2. Vérifier si l'entité existe
+	    	if (quizEntity.isPresent()) {
+	    		QuizEntity quiz = quizEntity.get();
+	    		
+	   		 	int index = quiz.getCurrentQuestionNumber();
+
+		   		 List<QuestionEntity> lstQuestionQuiz = new ArrayList<>();
+				 lstQuestionQuiz = quiz.getQuestionsList();		 
+				 
+				 QuestionEntity currentQuestion = lstQuestionQuiz.get(index-1);
+				
+	    		return mapToQuestionDTO(currentQuestion);
+	    	} else {
+	            // 4. Si la question n'est pas trouvée, retourner null ou, 
+	            //    mieux, lancer une exception personnalisée (non implémentée ici)
+	    		return null; 
+	    	}
+		}
+	 
+	 @Override
+	    @Transactional
+		public QuestionDTO getNextQuestion(Long id) {
+		 Optional<QuizEntity> quizEntity = quizRepository.findById(id);
+
+	        // 2. Vérifier si l'entité existe
+	    	if (quizEntity.isPresent()) {
+	    		QuizEntity quiz = quizEntity.get();
+	    		
+	   		 	int index = quiz.getCurrentQuestionNumber()+1;
+
+		   		 List<QuestionEntity> lstQuestionQuiz = new ArrayList<>();
+				 lstQuestionQuiz = quiz.getQuestionsList();		 
+				 
+				 QuestionEntity currentQuestion = lstQuestionQuiz.get(index-1);
+				 quiz.setCurrentQuestionNumber(index);
+				 quizRepository.save(quiz);
+	    		return mapToQuestionDTO(currentQuestion);
+	    	} else {
+	            // 4. Si la question n'est pas trouvée, retourner null ou, 
+	            //    mieux, lancer une exception personnalisée (non implémentée ici)
+	    		return null; 
+	    	}
+		}
 	
 	//méthode POST d'un quiz
 	public QuizEntity quizPost(QuizEntity body) {
@@ -148,6 +198,8 @@ public class QuizServiceImpl implements QuizService {
 		return quizRepository.save(modifiedQuiz);
 		
 	}
+	
+	
 	
 	private QuizDTO mapToDTO(QuizEntity entity) {
 		QuizDTO dto = new QuizDTO();
@@ -205,5 +257,8 @@ public class QuizServiceImpl implements QuizService {
         
         return dto;
     }
+
+
+	
 	
 }

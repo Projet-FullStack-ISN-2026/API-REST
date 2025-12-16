@@ -84,6 +84,16 @@ public interface QuizService {
 
 
 	QuizDTO quizFinish(Long id);
+
+
+
+
+	QuestionDTO getCurrentQuestion(Long quizId);
+
+
+
+
+	QuestionDTO getNextQuestion(Long id);
 	
 	
 	/**
