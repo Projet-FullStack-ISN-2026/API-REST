@@ -62,7 +62,6 @@ public interface QuizService {
 	 * @param quizId L'ID du quiz
 	 * @param questionId L'ID de la question
 	 */
-	public void quizQuizIdQuestionsQuestionIdDelete(Long quizId, Long questionId);
 	
 	
 	/**

@@ -3,6 +3,8 @@ package com.tf8.quizapp.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tf8.quizapp.model.dto.ChooseDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
 import com.tf8.quizapp.model.dto.QuizDetailDTO;
@@ -67,8 +70,6 @@ public class QuizApiController {
 		return quizService.quizPost(body);
 	}
 	
-	
-    
 	@RequestMapping("/{quizId}/play/current-question") 
     @GetMapping()
     public QuestionDTO currentQuestion(@PathVariable Long quizId) {
@@ -76,10 +77,20 @@ public class QuizApiController {
     }
     
 	@RequestMapping("/{quizId}/play/next-question") 
-    @GetMapping("/quiz/{quizId}/play/next-question")
+    @GetMapping()
     public QuestionDTO nextQuestion(@PathVariable Long quizId) {
     	return quizService.getNextQuestion(quizId);
     }
+	
+	@RequestMapping("/{quizId}/play/answer") 
+    @PostMapping()
+    public ResponseEntity saveAnswer(@RequestBody ChooseDTO body) {
+		ChooseDTO response = quizService.saveAnswer(body);
+		return new ResponseEntity(response, HttpStatus.ACCEPTED);
+    	 
+    }
+	
+	
     /*
 	@RequestMapping("/{quizId}/play/leaderboard") 
     @GetMapping()

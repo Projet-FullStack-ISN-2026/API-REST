@@ -1,5 +1,7 @@
 package com.tf8.quizapp.service.impl;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -7,13 +9,16 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.tf8.quizapp.model.dto.ChooseDTO;
 import com.tf8.quizapp.model.dto.OptionsDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
 import com.tf8.quizapp.model.dto.QuizDetailDTO;
 import com.tf8.quizapp.model.entity.*;
+import com.tf8.quizapp.repository.ChooseRepository;
+import com.tf8.quizapp.repository.OptionsRepository;
 import com.tf8.quizapp.repository.QuizRepository;
-import com.tf8.quizapp.service.*;
+import com.tf8.quizapp.repository.UserRepository;
 
 
 import com.tf8.quizapp.service.QuizService;
@@ -25,13 +30,21 @@ public class QuizServiceImpl implements QuizService {
 
 	//private final QuizRepository quizrepository;
 	private final QuizRepository quizRepository;
+	private final OptionsRepository optionRepository;
+	private final UserRepository userRepository;
+	private final ChooseRepository chooseRepository;
+
 	
 	
 	/**
      * Injection de dépendance.
      */
-	public QuizServiceImpl(QuizRepository quizRepository) {
+	public QuizServiceImpl(QuizRepository quizRepository, OptionsRepository optionRepository, UserRepository userRepository, ChooseRepository chooseRepository ) {
 		this.quizRepository = quizRepository;
+		this.optionRepository = optionRepository;
+		this.userRepository = userRepository;
+		this.chooseRepository = chooseRepository;
+
 	}
 	
 	
@@ -170,17 +183,36 @@ public class QuizServiceImpl implements QuizService {
 	    		return null; 
 	    	}
 		}
+	 
+	 public ChooseDTO saveAnswer(ChooseDTO body) {
+
+		 	UserEntity user = userRepository.findById(body.getIdUser())
+		            .orElseThrow(() -> new RuntimeException("User not found"));
+
+	        QuizEntity quiz = quizRepository.findById(body.getIdQuiz())
+	            .orElseThrow(() -> new RuntimeException("Quiz not found"));
+
+	        OptionsEntity option = optionRepository.findById(body.getIdOption())
+	            .orElseThrow(() -> new RuntimeException("Option not found"));
+
+	        ChooseEntity choose = new ChooseEntity();
+	        choose.setUser(user);
+	        choose.setQuiz(quiz);
+	        choose.setOption(option);
+	        LocalDateTime ldt = LocalDateTime.now();
+	        Timestamp ts = Timestamp.valueOf(ldt);
+	        choose.setDate(ts);
+	        
+	        chooseRepository.save(choose);
+
+	        return mapToChooseDTO(choose);
+	    }
 	
 	//méthode POST d'un quiz
 	public QuizEntity quizPost(QuizEntity body) {
 		return quizRepository.save(body);
 	}
 	
-	
-	
-	public void quizQuizIdQuestionsQuestionIdDelete(Long quizId, Long questionId) {
-		
-	}
 	
 	//méthode PUT(modification) d'un quiz
 	public QuizEntity quizQuizIdPut(Long quizId, QuizEntity body) {
@@ -254,6 +286,16 @@ public class QuizServiceImpl implements QuizService {
             }).collect(Collectors.toList());
             dto.setOptions(optionsDtos);
         }
+        
+        return dto;
+    }
+	
+	private ChooseDTO mapToChooseDTO(ChooseEntity entity) {
+		ChooseDTO dto = new ChooseDTO();
+        dto.setIdOption(entity.getOption().getId());
+        dto.setIdQuiz(entity.getQuiz().getId()); 
+        dto.setIdUser(entity.getUser().getId()); 
+        
         
         return dto;
     }

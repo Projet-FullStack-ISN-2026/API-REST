@@ -11,7 +11,17 @@ public class ChooseDTO {
 	private Long idUser;
 	@NotNull(message = "The ID of the selected option is required")
 	private Long idOption;
+	// modif par jason, ajout Quizd
+	private Long idQuiz;
 	
+	public Long getIdQuiz() {
+		return idQuiz;
+	}
+
+	public void setIdQuiz(Long idQuiz) {
+		this.idQuiz = idQuiz;
+	}
+
 	// Getters and Setters
 	/**
 	 * Getter of the user's ID
