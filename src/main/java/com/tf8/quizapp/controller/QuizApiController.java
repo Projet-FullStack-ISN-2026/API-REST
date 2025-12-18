@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
+import com.tf8.quizapp.model.dto.ClassementDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
 import com.tf8.quizapp.model.dto.QuizDetailDTO;
@@ -98,15 +99,13 @@ public class QuizApiController {
 		return quizService.adminAnswer(quizId);
     	 
     }
-	
-	
-    /*
+    
 	@RequestMapping("/{quizId}/play/leaderboard") 
     @GetMapping()
-    public List<ClassementDTO> getClassement(@PathVariable Long quizId) {
+    public ClassementDTO getClassement(@PathVariable Long quizId) {
     	return quizService.getClassement(quizId);
     }
-	*/
+	
 	
 	
 }

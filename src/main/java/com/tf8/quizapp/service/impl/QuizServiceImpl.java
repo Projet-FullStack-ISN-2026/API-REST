@@ -9,16 +9,21 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Service;
 
 import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
+import com.tf8.quizapp.model.dto.ClassementDTO;
+import com.tf8.quizapp.model.dto.ClassementEntryDTO;
 import com.tf8.quizapp.model.dto.OptionsDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
 import com.tf8.quizapp.model.dto.QuizDetailDTO;
+import com.tf8.quizapp.model.dto.UserResponseDTO;
 import com.tf8.quizapp.model.entity.*;
 import com.tf8.quizapp.repository.ChooseRepository;
+import com.tf8.quizapp.repository.ClassementRepository;
 import com.tf8.quizapp.repository.OptionsRepository;
 import com.tf8.quizapp.repository.QuestionRepository;
 import com.tf8.quizapp.repository.QuizRepository;
@@ -38,18 +43,20 @@ public class QuizServiceImpl implements QuizService {
 	private final UserRepository userRepository;
 	private final ChooseRepository chooseRepository;
 	private final QuestionRepository questionRepository;
+	private final ClassementRepository classementRepository;
 
 	
 	
 	/**
      * Injection de dépendance.
      */
-	public QuizServiceImpl(QuizRepository quizRepository, OptionsRepository optionRepository, UserRepository userRepository, ChooseRepository chooseRepository, QuestionRepository questionRepository ) {
+	public QuizServiceImpl(QuizRepository quizRepository, OptionsRepository optionRepository, UserRepository userRepository, ChooseRepository chooseRepository, QuestionRepository questionRepository, ClassementRepository classementRepository ) {
 		this.quizRepository = quizRepository;
 		this.optionRepository = optionRepository;
 		this.userRepository = userRepository;
 		this.chooseRepository = chooseRepository;
 		this.questionRepository = questionRepository;
+		this.classementRepository = classementRepository;
 
 	}
 	
@@ -339,6 +346,42 @@ public class QuizServiceImpl implements QuizService {
         
         return dto;
     }
+	
+public ClassementDTO getClassement(Long quizId) {
+		
+		UserServiceImpl userService = new UserServiceImpl(userRepository);
+
+	    // DTO principal
+	    ClassementDTO classementDTO = new ClassementDTO();
+	    classementDTO.setQuizId(quizId);
+
+	    List<ClassementEntryDTO> entries = new ArrayList<>();
+
+	    // Données brutes
+	    SqlRowSet rowSet = classementRepository.getClassementRaw(quizId);
+
+	    int rank = 1;
+
+	    while (rowSet.next()) {
+
+	        // --- User ---
+	        UserResponseDTO user = new UserResponseDTO();
+	        long id_joueur = rowSet.getInt("user_id");
+	        user = userService.getUserById(id_joueur);
+	        // --- Entry ---
+	        ClassementEntryDTO entry = new ClassementEntryDTO();
+	        entry.setRank(rank++);
+	        entry.setUser(user);
+	        entry.setScore(rowSet.getInt("Score"));
+
+	        entries.add(entry);
+	    }
+
+	    classementDTO.setEntries(entries);
+
+	    return classementDTO;
+	}
+
 
 	
 }
