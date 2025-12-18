@@ -9,6 +9,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
 import com.tf8.quizapp.model.dto.OptionsDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
@@ -269,6 +270,24 @@ public class QuizServiceImpl implements QuizService {
        
         return dto;
     }
+	/*
+	public AnswerDTO adminAnswer(Long quizId) {
+		Optional<QuizEntity> quizEntity = quizRepository.findById(quizId);
+
+        // 2. Vérifier si l'entité existe
+    	if (quizEntity.isPresent()) {
+    		QuizEntity quiz = quizEntity.get();
+    		Integer questionId = quiz.getCurrentQuestionNumber();
+    		
+    		
+    		AnswerDTO response;
+    		return response;
+    	} else {
+            // 4. Si la question n'est pas trouvée, retourner null ou, 
+            //    mieux, lancer une exception personnalisée (non implémentée ici)
+    		return null; 
+    	}
+	}*/
 	
 	private QuestionDTO mapToQuestionDTO(QuestionEntity entity) {
         QuestionDTO dto = new QuestionDTO();
@@ -300,13 +319,5 @@ public class QuizServiceImpl implements QuizService {
         return dto;
     }
 
-
-	public ChooseDTO adminAnswer(Long quizId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	
 	
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
@@ -92,8 +93,8 @@ public class QuizApiController {
 	/*
 	@RequestMapping("/{quizId}/admin/answer") 
     @GetMapping()
-    public ResponseEntity adminAnswer(@PathVariable Long quizId) {
-		ChooseDTO response = quizService.adminAnswer(quizId);
+    public AnswerDTO adminAnswer(@PathVariable Long quizId) {
+		AnswerDTO response = quizService.adminAnswer(quizId);
 		return quizService.adminAnswer(quizId);
     	 
     }
@@ -105,15 +106,7 @@ public class QuizApiController {
     public List<ClassementDTO> getClassement(@PathVariable Long quizId) {
     	return quizService.getClassement(quizId);
     }
-	@RequestMapping("/{quizId}/user/{userId}/option/{optionId}/answer") 
-	@PostMapping()
-    public ChooseEntity answerQuiz(
-        @PathVariable Long quizId,
-        @PathVariable Long userId,
-        @PathVariable Long optionId
-    ) {
-        return quizService.saveAnswer(quizId, userId, optionId);
-    }*/
+	*/
 	
 	
 }
