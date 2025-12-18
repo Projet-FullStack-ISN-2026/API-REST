@@ -8,6 +8,7 @@ import com.tf8.quizapp.service.UserService;
 import com.tf8.quizapp.model.entity.UserEntity;
 import com.tf8.quizapp.exception.UserAlreadyExistsException;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.NoSuchElementException;
@@ -16,12 +17,11 @@ import java.util.NoSuchElementException;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder passwordEncoder; // 1. Injecter l'encodeur
     
-    // ON A SUPPRIMÉ LA LIGNE "private final PasswordEncoder passwordEncoder;"
-
-    // ON A RETIRÉ "PasswordEncoder" DU CONSTRUCTEUR
-    public UserServiceImpl(UserRepository userRepository) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -31,7 +31,7 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new RuntimeException("Email ou mot de passe incorrect"));
 
         // COMPARAISON TEXTE BRUT (Car plus d'encodeur)
-        if (!user.getPassword().equals(userLogin.getPassword())) {
+        if (!passwordEncoder.matches(userLogin.getPassword(), user.getPassword())) {
             throw new RuntimeException("Email ou mot de passe incorrect");
         }
         return mapToResponseDTO(user);
@@ -49,8 +49,8 @@ public class UserServiceImpl implements UserService {
         user.setFirstname(requestDTO.getFirstName());
         user.setLastname(requestDTO.getLastName());
         
-        // STOCKAGE TEXTE BRUT (à sécurisé)
-        user.setPassword(requestDTO.getPassword());
+        String encodedPassword = passwordEncoder.encode(requestDTO.getPassword());
+        user.setPassword(encodedPassword);;
         
         user.setRole(0);
 
