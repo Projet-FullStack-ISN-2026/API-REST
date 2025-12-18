@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
  
 /**
@@ -36,6 +37,8 @@ public class QuizDTO {
 	 */
 	@NotNull(message = "Quiz'step is required")
 	private int step;
+	@NotNull(message = "Quiz'step is required")
+	@NotEmpty(message = "Question's list mustn't be empty")
 	private List<QuestionDTO> listQuestions= new ArrayList<>();
 	
 	public List<QuestionDTO> getListQuestions() {
@@ -136,18 +139,20 @@ public class QuizDTO {
 	 * @return the quiz's questions list
 	 */
 	public ArrayList<QuestionDTO> getQuestionList() {
-	    return new ArrayList<>(this.listQuestions);
+	    return (ArrayList<QuestionDTO>) this.listQuestions;
 	}
 	/**
 	 * Setter of the quiz's questions list
 	 * @param questionList the new quiz's questions list
 	 */
 	public void setQuestionList(List<QuestionDTO> questionList) {
-	    if (questionList == null) {
-	        this.listQuestions = new ArrayList<>();
-	    } else {
-	        this.listQuestions = new ArrayList<>(questionList);
-	    }
+	    if (questionList != null) {
+	        this.listQuestions = questionList;
+	    } else if (questionList == null || questionList.isEmpty()) {
+	        throw new IllegalArgumentException(
+	                "The list of question mustn't be empty or null"
+	            );
+	}
 	}
 
 }
