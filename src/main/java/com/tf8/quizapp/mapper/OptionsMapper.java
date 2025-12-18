@@ -13,10 +13,16 @@ import com.tf8.quizapp.model.entity.OptionsEntity;
 @Mapper(componentModel = "spring")
 public interface OptionsMapper {
 
-    @Mapping(target = "isCorrect", source = "isCorrect")
-	OptionsDTO toDTO(OptionsEntity entity);
-    
-    @Mapping(target = "isCorrect", source = "isCorrect")
+	 @Mapping(
+		        target = "isCorrect",
+		        expression = "java(entity.isCorrect())"
+		    )
+    OptionsDTO toDTO(OptionsEntity entity);
+	 @Mapping(
+		        target = "isCorrect",
+		        expression = "java(dto.isCorrect())"
+		    )
     @Mapping(target = "question", ignore = true)
-	OptionsEntity toEntity(OptionsDTO dto);
+    OptionsEntity toEntity(OptionsDTO dto);
 }
+
