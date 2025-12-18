@@ -93,7 +93,7 @@ public class QuestionServiceImpl implements QuestionService {
                 OptionsDTO optDto = new OptionsDTO();
                 optDto.setId(optEntity.getId());
                 optDto.setText(optEntity.getText());
-                optDto.setCorrect(optEntity.getIsCorrect());
+                optDto.setIsCorrect(optEntity.getIsCorrect());
                 return optDto;
             }).collect(Collectors.toList());
             dto.setOptions(optionsDtos);

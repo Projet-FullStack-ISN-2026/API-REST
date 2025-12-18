@@ -24,7 +24,7 @@ public class OptionsEntity {
 	private String text;
 
 	//A rajouter dans la DTO
-	@Column(name = "isCorrect", nullable = false)
+	@Column( nullable = false)
     private boolean isCorrect;
 	
 	//A rajouter dans la DTO

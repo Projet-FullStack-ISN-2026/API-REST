@@ -21,10 +21,10 @@ public class UserRequestDTO {
     private String password; 
 
     @NotBlank(message = "Le nom est requis.")
-    private String lastname;
+    private String lastName;
     
     @NotBlank(message = "Le prénom est requis.")
-    private String firstname;
+    private String firstName;
 
     // Le 'role' n'est pas exposé ici car il est géré par la logique métier/sécurité.
 
@@ -47,18 +47,18 @@ public class UserRequestDTO {
     }
 
     public String getLastname() {
-        return lastname;
+        return lastName;
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastName = lastname;
     }
 
     public String getFirstname() {
-        return firstname;
+        return firstName;
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstName = firstname;
     }
 }

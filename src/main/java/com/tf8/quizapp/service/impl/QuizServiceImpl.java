@@ -281,7 +281,7 @@ public class QuizServiceImpl implements QuizService {
                 OptionsDTO optDto = new OptionsDTO();
                 optDto.setId(optEntity.getId());
                 optDto.setText(optEntity.getText());
-                optDto.setCorrect(optEntity.getIsCorrect());
+                optDto.setIsCorrect(optEntity.getIsCorrect());
                 return optDto;
             }).collect(Collectors.toList());
             dto.setOptions(optionsDtos);
@@ -299,6 +299,12 @@ public class QuizServiceImpl implements QuizService {
         
         return dto;
     }
+
+
+	public ChooseDTO adminAnswer(Long quizId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 
 	

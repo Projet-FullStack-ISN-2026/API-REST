@@ -89,7 +89,15 @@ public class QuizApiController {
 		return new ResponseEntity(response, HttpStatus.ACCEPTED);
     	 
     }
-	
+	/*
+	@RequestMapping("/{quizId}/admin/answer") 
+    @GetMapping()
+    public ResponseEntity adminAnswer(@PathVariable Long quizId) {
+		ChooseDTO response = quizService.adminAnswer(quizId);
+		return quizService.adminAnswer(quizId);
+    	 
+    }
+	*/
 	
     /*
 	@RequestMapping("/{quizId}/play/leaderboard") 

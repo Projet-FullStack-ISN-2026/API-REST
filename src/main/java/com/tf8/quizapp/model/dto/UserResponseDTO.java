@@ -7,8 +7,8 @@ public class UserResponseDTO {
 
  private Long id;
  private String email;
- private String lastname;
- private String firstname;
+ private String lastName;
+ private String firstName;
  private int role; // Le rôle est souvent inclus pour les besoins de l'interface utilisateur.
 
  // Note : Le champ 'password' est délibérément omis.
@@ -32,19 +32,19 @@ public class UserResponseDTO {
  }
 
  public String getLastname() {
-     return lastname;
+     return lastName;
  }
 
  public void setLastname(String lastname) {
-     this.lastname = lastname;
+     this.lastName = lastname;
  }
 
  public String getFirstname() {
-     return firstname;
+     return firstName;
  }
 
  public void setFirstname(String firstname) {
-     this.firstname = firstname;
+     this.firstName = firstname;
  }
 
  public int getRole() {

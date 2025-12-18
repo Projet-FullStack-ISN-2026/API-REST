@@ -24,7 +24,6 @@ public class OptionsDTO {
 	public String getText() {
 		return text;
 	}
-
 	/**
 	 * Setter of the option's content
 	 * @param text the content of the option
@@ -40,18 +39,20 @@ public class OptionsDTO {
 	public Long getId() {
 		return id;
 	}
+	
+	public void setId(Long id) {
+		this.id = id;
+	}
 
 	public boolean isCorrect() {
 		return isCorrect;
 	}
 
-	public void setCorrect(boolean isCorrect) {
+	public void setIsCorrect(boolean isCorrect) {
 		this.isCorrect = isCorrect;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	
 	
 	
 

@@ -25,6 +25,7 @@ replay_pid*
 
 # SpringBoot .gitignore
 HELP.md
+bin/
 target/
 .mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
