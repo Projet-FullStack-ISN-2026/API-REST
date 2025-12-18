@@ -1,13 +1,16 @@
  package com.tf8.quizapp.model.dto;
  
 import java.sql.Timestamp;
+import java.util.List;
+
+import com.tf8.quizapp.model.entity.QuestionEntity;
 
 import jakarta.validation.constraints.NotNull;
  
 /**
 * @author imane
 */
-public class QuizDTO {
+public class QuizDetailDTO {
 	@NotNull(message = "Quiz ID is required")
 	private Long id;
 	private String title;
@@ -20,7 +23,16 @@ public class QuizDTO {
 	private int status;
 	private Timestamp startQuestionTime;
 	private Integer currentQuestionNumber;
+	private List<QuestionDTO> questionsList ;
 	
+	public List<QuestionDTO> getQuestionsList() {
+		return questionsList;
+	}
+
+	public void setQuestionsList(List<QuestionDTO> questionsList) {
+		this.questionsList = questionsList;
+	}
+
 	/**
 	 * this attribute fait référence à quoi est affiché
 	 * 10 to display a question

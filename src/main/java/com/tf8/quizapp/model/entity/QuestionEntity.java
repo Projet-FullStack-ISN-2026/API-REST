@@ -1,3 +1,4 @@
+
 /**
 
 * @author imane
@@ -6,7 +7,8 @@
 
 package com.tf8.quizapp.model.entity;
 
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,6 +16,9 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 
@@ -29,16 +34,21 @@ public class QuestionEntity {
 	private String question;
 
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL)
-    private List<OptionsEntity> options;
+    private Set<OptionsEntity> options;
 	
-	public Long getId() {
-		return id;
+	//ajouté par Ruben
+	@ManyToMany(mappedBy = "questionsList")
+	private Set<QuizEntity> quizList = new HashSet<>();
+
+	
+	public Set<QuizEntity> getQuizList() {
+		return quizList;
 	}
 
-	public void setId(Long id) {
-		this.id = id;
+	public void setQuizList(Set<QuizEntity> quizList) {
+		this.quizList = quizList;
 	}
-	
+
 	/**
 	 * Getter of the question content
 	 * @return the question content
@@ -55,11 +65,19 @@ public class QuestionEntity {
 		this.question = question;
 	}
 
-	public List<OptionsEntity> getOptions() {
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public Set<OptionsEntity> getOptions() {
 		return options;
 	}
 
-	public void setOptions(List<OptionsEntity> options) {
+	public void setOptions(Set<OptionsEntity> options) {
 		this.options = options;
 	}
 	

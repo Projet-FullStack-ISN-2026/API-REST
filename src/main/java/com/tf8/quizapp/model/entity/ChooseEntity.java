@@ -21,10 +21,10 @@ public class ChooseEntity {
 	@ManyToOne
 	@JoinColumn(name = "user_id", nullable = false)
 	private UserEntity user;
-
+	//jason, correction pour match le nom de la bdd
 	// Link to Options
 	@ManyToOne
-	@JoinColumn(name = "options_id", nullable = false)
+	@JoinColumn(name = "option_id", nullable = false)
 	private OptionsEntity option;
 
 	// Link to Quiz
