@@ -17,9 +17,9 @@ public class UserDTO {
 	@NotBlank(message = "User'sPassword is required")
 	private String password;
 	@NotBlank(message = "User'sLastname is required")
-	private String lastname;
+	private String lastName;
 	@NotBlank(message = "User'sFirstname is required")
-	private String firstname;
+	private String firstName;
 	@NotBlank(message = "User's role is required")
 	private int role;
 
@@ -71,28 +71,28 @@ public class UserDTO {
 	 * @return User's Last name
 	 */
 	public String getLastname() {
-		return lastname;
+		return this.lastName;
 	}
 	/**
 	 * Setter of the user's Last name
 	 * @param lastname
 	 */
-	public void setLastname(String lastname) {
-		this.lastname = lastname;
+	public void setLastname(String lastName) {
+		this.lastName = lastName;
 	}
 	/**
 	 * Getter of the user's first name
 	 * @return user's first name
 	 */
-	public String getFirstname() {
-		return firstname;
+	public String getFirstName() {
+		return firstName;
 	}
 	/**
 	 * Setter of user's first name
 	 * @param firstname user's first name
 	 */
 	public void setFirstname(String firstname) {
-		this.firstname = firstname;
+		this.firstName = firstName;
 	}
 	/**
 	 * Getter of user's role
