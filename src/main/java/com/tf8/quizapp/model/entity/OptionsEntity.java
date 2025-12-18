@@ -32,10 +32,14 @@ public class OptionsEntity {
     @JoinColumn(name = "question_id") 
     private QuestionEntity question;
 	
-	
 	public Long getId() {
 		return id;
 	}
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 	/**
 	 * Getter of the Option's content
 	 * @return the Option's content
@@ -43,6 +47,7 @@ public class OptionsEntity {
 	public String getText() {
 		return text;
 	}
+
 	/**
 	 * Setter of the Option's content
 	 * @param text the Option's content
@@ -50,19 +55,21 @@ public class OptionsEntity {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public boolean getIsCorrect() {
+
+	public boolean isCorrect() {
 		return isCorrect;
 	}
+
 	public void setIsCorrect(boolean isCorrect) {
 		this.isCorrect = isCorrect;
 	}
+
 	public QuestionEntity getQuestion() {
 		return question;
 	}
+
 	public void setQuestion(QuestionEntity question) {
 		this.question = question;
 	}
-	
-	
 }
  

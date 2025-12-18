@@ -17,7 +17,7 @@ public class QuizDTO {
 	 * 20 for the status 'RUNNING'
 	 * 30 for the status 'FINISHED'
 	 */
-	private int status;
+	private Integer status;
 	private Timestamp startQuestionTime;
 	private Integer currentQuestionNumber;
 	
@@ -62,7 +62,7 @@ public class QuizDTO {
 	 * Gets the current status.
 	 * @return the status
 	 */
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 	
@@ -70,7 +70,7 @@ public class QuizDTO {
 	 * Sets the status.
 	 * @param status the new status to set
 	 */
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	

@@ -40,14 +40,13 @@ public class QuestionEntity {
 	@ManyToMany(mappedBy = "questionsList")
 	private Set<QuizEntity> quizList = new HashSet<>();
 
-	
-	public Set<QuizEntity> getQuizList() {
-		return quizList;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setQuizList(Set<QuizEntity> quizList) {
-		this.quizList = quizList;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
 	/**
 	 * Getter of the question content
@@ -65,14 +64,6 @@ public class QuestionEntity {
 		this.question = question;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
 	public Set<OptionsEntity> getOptions() {
 		return options;
 	}
@@ -80,7 +71,12 @@ public class QuestionEntity {
 	public void setOptions(Set<OptionsEntity> options) {
 		this.options = options;
 	}
-	
-	
 
+    public Set<QuizEntity> getQuizList() {
+        return quizList;
+    }
+
+    public void setQuizList(Set<QuizEntity> quizList) {
+        this.quizList = quizList;
+    }
 }
