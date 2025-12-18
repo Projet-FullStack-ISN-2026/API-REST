@@ -3,8 +3,10 @@ package com.tf8.quizapp.service.impl;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
@@ -18,6 +20,7 @@ import com.tf8.quizapp.model.dto.QuizDetailDTO;
 import com.tf8.quizapp.model.entity.*;
 import com.tf8.quizapp.repository.ChooseRepository;
 import com.tf8.quizapp.repository.OptionsRepository;
+import com.tf8.quizapp.repository.QuestionRepository;
 import com.tf8.quizapp.repository.QuizRepository;
 import com.tf8.quizapp.repository.UserRepository;
 
@@ -34,17 +37,19 @@ public class QuizServiceImpl implements QuizService {
 	private final OptionsRepository optionRepository;
 	private final UserRepository userRepository;
 	private final ChooseRepository chooseRepository;
+	private final QuestionRepository questionRepository;
 
 	
 	
 	/**
      * Injection de dépendance.
      */
-	public QuizServiceImpl(QuizRepository quizRepository, OptionsRepository optionRepository, UserRepository userRepository, ChooseRepository chooseRepository ) {
+	public QuizServiceImpl(QuizRepository quizRepository, OptionsRepository optionRepository, UserRepository userRepository, ChooseRepository chooseRepository, QuestionRepository questionRepository ) {
 		this.quizRepository = quizRepository;
 		this.optionRepository = optionRepository;
 		this.userRepository = userRepository;
 		this.chooseRepository = chooseRepository;
+		this.questionRepository = questionRepository;
 
 	}
 	
@@ -270,24 +275,40 @@ public class QuizServiceImpl implements QuizService {
        
         return dto;
     }
-	/*
+	
 	public AnswerDTO adminAnswer(Long quizId) {
 		Optional<QuizEntity> quizEntity = quizRepository.findById(quizId);
-
+		Long correctOptionId = (long) 0;
+		Long questionId =  (long) 0 ;
         // 2. Vérifier si l'entité existe
     	if (quizEntity.isPresent()) {
     		QuizEntity quiz = quizEntity.get();
-    		Integer questionId = quiz.getCurrentQuestionNumber();
+			 List<QuestionEntity> lstQuestionQuiz = new ArrayList<>();
+			 lstQuestionQuiz = quiz.getQuestionsList();		 
+			 
+			 QuestionEntity question = lstQuestionQuiz.get(quiz.getCurrentQuestionNumber()-1);
+    		
+			questionId = question.getId();
+    		Set<OptionsEntity> options = new HashSet<>();
+    		options = question.getOptions();	
     		
     		
-    		AnswerDTO response;
+    		for (OptionsEntity option : options) {
+    			if (option.getIsCorrect()) {
+    				correctOptionId = option.getId();
+    			}
+    		}
+    		AnswerDTO response = new AnswerDTO();
+    		
+    		response.setCorrectOptionId(correctOptionId);
+    		response.setQuestionId(questionId);
     		return response;
     	} else {
             // 4. Si la question n'est pas trouvée, retourner null ou, 
             //    mieux, lancer une exception personnalisée (non implémentée ici)
     		return null; 
     	}
-	}*/
+	}
 	
 	private QuestionDTO mapToQuestionDTO(QuestionEntity entity) {
         QuestionDTO dto = new QuestionDTO();

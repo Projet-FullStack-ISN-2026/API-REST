@@ -90,7 +90,7 @@ public class QuizApiController {
 		return new ResponseEntity(response, HttpStatus.ACCEPTED);
     	 
     }
-	/*
+	
 	@RequestMapping("/{quizId}/admin/answer") 
     @GetMapping()
     public AnswerDTO adminAnswer(@PathVariable Long quizId) {
@@ -98,7 +98,7 @@ public class QuizApiController {
 		return quizService.adminAnswer(quizId);
     	 
     }
-	*/
+	
 	
     /*
 	@RequestMapping("/{quizId}/play/leaderboard") 
