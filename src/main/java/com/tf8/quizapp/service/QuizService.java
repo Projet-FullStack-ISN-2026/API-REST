@@ -34,7 +34,7 @@ public interface QuizService {
 	
 	/**
 	 * Envoie un nouveau quiz dans la BDD
-	 * @param newQuiz DTO du nouveau quiz à ajouter
+	 * @param body DTO du nouveau quiz à ajouter
 	 * @return La DTO du quiz à ajouter dans la BDD
 	 */
 	public QuizEntity quizPost(QuizEntity body);

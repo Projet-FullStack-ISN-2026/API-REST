@@ -144,8 +144,8 @@ public class QuizServiceImpl implements QuizService {
 	        // 2. Vérifier si l'entité existe
 	    	if (quizEntity.isPresent()) {
 	    		QuizEntity quiz = quizEntity.get();
-	    		
-	   		 	int index = quiz.getCurrentQuestionNumber();
+
+                Integer index = quiz.getCurrentQuestionNumber();
 
 		   		 List<QuestionEntity> lstQuestionQuiz = new ArrayList<>();
 				 lstQuestionQuiz = quiz.getQuestionsList();		 
@@ -168,8 +168,8 @@ public class QuizServiceImpl implements QuizService {
 	        // 2. Vérifier si l'entité existe
 	    	if (quizEntity.isPresent()) {
 	    		QuizEntity quiz = quizEntity.get();
-	    		
-	   		 	int index = quiz.getCurrentQuestionNumber()+1;
+
+                Integer index = quiz.getCurrentQuestionNumber()+1;
 
 		   		 List<QuestionEntity> lstQuestionQuiz = new ArrayList<>();
 				 lstQuestionQuiz = quiz.getQuestionsList();		 

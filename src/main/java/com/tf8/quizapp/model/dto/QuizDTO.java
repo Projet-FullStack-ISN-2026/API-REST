@@ -28,8 +28,20 @@ public class QuizDTO {
 	 * 30 to display the answer
 	 * 40 to display classement of the players
 	 */
-	private int step;
-	
+	private Integer step;
+
+    /**
+     * Gets the quiz ID.
+     * @return the quiz's ID
+     */
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
 	/**
 	 * Gets the title.
 	 * @return the title
@@ -99,7 +111,7 @@ public class QuizDTO {
 	 * Gets the current step.
 	 * @return the step
 	 */
-	public int getStep() {
+	public Integer getStep() {
 		return step;
 	}
 	
@@ -107,21 +119,8 @@ public class QuizDTO {
 	 * Sets the current step.
 	 * @param step the new step to set
 	 */
-	public void setStep(int step) {
+	public void setStep(Integer step) {
 		this.step = step;
-	}
-	
-	/**
-	 * Gets the quiz ID.
-	 * @return the quiz's ID
-	 */
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-		
 	}
 
 	

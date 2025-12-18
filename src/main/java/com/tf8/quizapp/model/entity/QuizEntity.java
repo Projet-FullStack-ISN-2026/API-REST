@@ -49,13 +49,7 @@ public class QuizEntity {
 	@Column(nullable = true)
 	private Integer status;
 
-	public Long getId() {
-		return id;
-	}
 
-	public void setId(Long id) {
-		this.id = id;
-	}
 
 	@Column(nullable = true)
 	private Timestamp startQuestionTime;
@@ -85,7 +79,14 @@ public class QuizEntity {
         inverseJoinColumns = @JoinColumn(name = "question_id") // Colonne de l'autre entité (Question)
     )
 	private List<QuestionEntity> questionsList = new ArrayList<>();
-	
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 	
 	public List<QuestionEntity> getQuestionsList() {
 		return questionsList;

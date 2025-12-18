@@ -20,7 +20,7 @@ public class QuizDetailDTO {
 	 * 20 for the status 'RUNNING'
 	 * 30 for the status 'FINISHED'
 	 */
-	private int status;
+	private Integer status;
 	private Timestamp startQuestionTime;
 	private Integer currentQuestionNumber;
 	private List<QuestionDTO> questionsList ;
@@ -40,7 +40,7 @@ public class QuizDetailDTO {
 	 * 30 to display the answer
 	 * 40 to display classement of the players
 	 */
-	private int step;
+	private Integer step;
 	
 	/**
 	 * Gets the title.
@@ -62,7 +62,7 @@ public class QuizDetailDTO {
 	 * Gets the current status.
 	 * @return the status
 	 */
-	public int getStatus() {
+	public Integer getStatus() {
 		return status;
 	}
 	
@@ -70,7 +70,7 @@ public class QuizDetailDTO {
 	 * Sets the status.
 	 * @param status the new status to set
 	 */
-	public void setStatus(int status) {
+	public void setStatus(Integer status) {
 		this.status = status;
 	}
 	
@@ -111,7 +111,7 @@ public class QuizDetailDTO {
 	 * Gets the current step.
 	 * @return the step
 	 */
-	public int getStep() {
+	public Integer getStep() {
 		return step;
 	}
 	
@@ -119,7 +119,7 @@ public class QuizDetailDTO {
 	 * Sets the current step.
 	 * @param step the new step to set
 	 */
-	public void setStep(int step) {
+	public void setStep(Integer step) {
 		this.step = step;
 	}
 	
