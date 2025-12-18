@@ -55,8 +55,8 @@ public class OptionsDTO {
 	 * Getter of isCorrect
 	 * @return true or false
 	 */
-	public Boolean getIsCorrect() {
-		return isCorrect;
+	public Boolean isCorrect() {
+		return this.isCorrect;
 	}
 	/**
 	 * Setter of isCorrect

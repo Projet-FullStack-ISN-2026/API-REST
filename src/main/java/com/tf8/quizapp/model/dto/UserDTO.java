@@ -91,7 +91,7 @@ public class UserDTO {
 	 * Setter of user's first name
 	 * @param firstname user's first name
 	 */
-	public void setFirstname(String firstname) {
+	public void setFirstname(String firstName) {
 		this.firstName = firstName;
 	}
 	/**

@@ -14,7 +14,7 @@ public class QuestionDTO {
 	private Long id;
 	@NotNull(message = "The question content is required")
 	private String question;
-	private List<OptionsDTO> options = new ArrayList<>();
+	private List<OptionsDTO> listOptions = new ArrayList<>();
 
 	/**
 	 * Constructor without parameters
@@ -55,18 +55,18 @@ public class QuestionDTO {
 	 * Getter of the question's options
 	 * @return
 	 */
-	public ArrayList<OptionsDTO> getOptions() {
-	    return new ArrayList<>(this.options);
+	public ArrayList<OptionsDTO> getListOptions() {
+	    return new ArrayList<>(this.listOptions);
 	}
 	/**
 	 * Setter of the question(s options
 	 * @param options the new options list
 	 */
-	public void setOptions(List<OptionsDTO> options) {
+	public void setListOptions(List<OptionsDTO> options) {
 	    if (options == null) {
-	        this.options = new ArrayList<>();
+	        this.listOptions = new ArrayList<>();
 	    } else {
-	        this.options = new ArrayList<>(options);
+	        this.listOptions = new ArrayList<>(options);
 	    }
 	}
 
