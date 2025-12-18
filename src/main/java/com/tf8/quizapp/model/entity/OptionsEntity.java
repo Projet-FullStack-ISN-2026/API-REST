@@ -26,7 +26,7 @@ public class OptionsEntity {
     private Boolean isCorrect;
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name = "question_id")
+	@JoinColumn(name = "question")
 	private QuestionEntity question;
 	/**
 	 * Getter of the option's ID
@@ -62,8 +62,8 @@ public class OptionsEntity {
 	 * Getter of isCorrect
 	 * @return true or false
 	 */
-	public Boolean getIsCorrect() {
-        return isCorrect;
+	public Boolean isCorrect() {
+        return this.isCorrect;
     }
 	/**
 	 * Setter of isCorrect

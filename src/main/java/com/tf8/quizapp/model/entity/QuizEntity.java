@@ -63,14 +63,6 @@ public class QuizEntity {
 	
 	@OneToMany(mappedBy = "quiz", cascade = CascadeType.ALL)
 	private List<QuestionEntity> questions = new ArrayList<>();	
-	 
-	/**
-	 * Getter of the quiz's questions
-	 * @return the quiz's questions
-	 */
-	public List<QuestionEntity> getQuestions() {
-		return questions;
-	}
 	/**
 	 * Gets the quiz ID.
 	 * @return the quiz's ID
@@ -85,13 +77,7 @@ public class QuizEntity {
 	public Long getId() {
 		return this.id;
 	}
-	/**
-	 * Setter of the quiz's questions
-	 * @param questions the quiz's questions
-	 */
-	public void setQuestions(List<QuestionEntity> questions) {
-		 this.questions = questions;
-	}
+
 
 	/**
 	 * Getter of the quiz's title
@@ -166,9 +152,17 @@ public class QuizEntity {
 	}
 	
 	/**
-	 * gets the questions' list
+	 * Getter of the quiz's questions
+	 * @return the quiz's questions
 	 */
-	public ArrayList<QuestionEntity> getQuestionList() {
-	    return new ArrayList<>(questions);
+	public List<QuestionEntity> getQuestions() {
+		return questions;
+	}
+	/**
+	 * Setter of the quiz's questions
+	 * @param questions the quiz's questions
+	 */
+	public void setQuestions(List<QuestionEntity> questions) {
+		 this.questions = questions;
 	}
 }

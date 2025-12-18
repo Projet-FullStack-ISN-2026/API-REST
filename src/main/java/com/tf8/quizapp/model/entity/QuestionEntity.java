@@ -1,9 +1,3 @@
-/**
-
-* @author imane
-
-*/
-
 package com.tf8.quizapp.model.entity;
 
 import java.util.ArrayList;
@@ -19,6 +13,9 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+/**
+ * @author imane
+ */
 
 @Entity
 @Table(name = "question")
@@ -35,7 +32,7 @@ public class QuestionEntity {
 	private QuizEntity quiz;
 
 	@OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<OptionsEntity> options = new ArrayList<>();
+    private List<OptionsEntity> listOptions = new ArrayList<>();
 	
 	/**
 	 * Getter of the question's ID
@@ -59,20 +56,6 @@ public class QuestionEntity {
 		return question;
 	}
 	/**
-	 * Getter of the options list
-	 * @return the options list
-	 */
-	public List<OptionsEntity> getOptions() {
-		return options;
-	}
-	/**
-	 * Setter of the options list
-	 * @param options the options list
-	 */
-	public void setOptions(List<OptionsEntity> options) {
-		this.options = options;
-	}
-	/**
 	 * Setter of the question content 
 	 * @param question the question content
 	 */
@@ -93,4 +76,20 @@ public class QuestionEntity {
 	public void setQuiz(QuizEntity quiz) {
 		this.quiz = quiz;
 	}
+	/**
+	 * Getter of the options list
+	 * @return the options list
+	 */
+	public List<OptionsEntity> getListOptions() {
+		return listOptions;
+	}
+	/**
+	 * Setter of the options list
+	 * @param options the options list
+	 */
+	public void setListOptions(List<OptionsEntity> options) {
+		this.listOptions = options;
+	}
+
+	
 }
