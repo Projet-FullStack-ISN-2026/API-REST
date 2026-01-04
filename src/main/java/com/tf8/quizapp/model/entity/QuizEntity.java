@@ -72,7 +72,7 @@ public class QuizEntity {
 	private Integer step;
 	
 	//ajouté pour test
-	@ManyToMany()
+	@ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
         name = "quiz_question", // Nom de la table de jointure
         joinColumns = @JoinColumn(name = "quiz_id"), // Colonne de cette entité (Quiz) dans la table de jointure

@@ -73,7 +73,22 @@ public class QuizServiceImpl implements QuizService {
 	}
 	
 	public QuizDetailDTO quizPost(QuizEntity body) {
-		return mapToDetailDTO(quizRepository.save(body));
+		if (body.getQuestionsList() != null) {
+	        for (QuestionEntity question : body.getQuestionsList()) {
+	            // Pour chaque question, vérifier si elle contient des options
+	            if (question.getOptions() != null) {
+	                for (OptionsEntity option : question.getOptions()) {
+	                    // CRUCIAL : Lier l'option à la question parente
+	                    // Cela permet à Hibernate de remplir la colonne 'question_id'
+	                    option.setQuestion(question);
+	                }
+	            }
+	        }
+	    }
+	    
+	    // Une fois les liens établis, on sauvegarde le quiz
+	    QuizEntity savedQuiz = quizRepository.save(body);
+	    return mapToDetailDTO(savedQuiz);
 	}
 	
 	@Override
