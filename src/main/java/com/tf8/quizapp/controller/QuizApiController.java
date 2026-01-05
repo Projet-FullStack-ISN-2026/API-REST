@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 
+import com.tf8.quizapp.model.dto.AdminStatDTO;
 import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
 import com.tf8.quizapp.model.dto.ClassementDTO;
@@ -127,6 +128,27 @@ public class QuizApiController {
     	return quizService.getClassement(quizId);
     }
 	
-	
+	//Avec token
+		/*
+		@RequestMapping("/{quizId}/admin/stats")
+		@GetMapping()
+		public AdminStatDTO adminStats(@AuthenticationPrincipal Jwt jwt) {
+			Long quizId = jwt.getClaim("quizId");
+			AdminStatDTO adminStats = new AdminStatDTO();
+			adminStats = quizService.getAdminStats(quizId);
+			return adminStats;
+		}
+		*/
+
+		//Sans token
+		
+		@RequestMapping("/{quizId}/admin/stats")
+		@GetMapping()
+		public AdminStatDTO adminStats(@PathVariable Long quizId) {
+			AdminStatDTO adminStats = new AdminStatDTO();
+			adminStats = quizService.getAdminStats(quizId);
+			return adminStats;
+		}
+		
 	
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+import com.tf8.quizapp.model.dto.AdminStatDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.dto.QuestionLinkDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
@@ -99,6 +100,12 @@ public interface QuizService {
 
 	QuizDetailDTO quizQuestionPost(Long quizId, QuestionLinkDTO questionId);
 	
+	/**
+	 * Récupérer la liste de statistiques de l'ensemble des réponses pour la question en cours d'un quiz
+	 * @param quizId L'ID d'un quiz
+	 * @return DTO de stats de la question en cours pour le quiz lancé
+	 */
+	AdminStatDTO getAdminStats(Long quizId);
 	
 	/**
 	 * Terminer un quiz
