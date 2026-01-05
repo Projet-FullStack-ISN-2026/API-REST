@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Set;
 
 import com.tf8.quizapp.model.dto.QuestionDTO;
+import com.tf8.quizapp.model.dto.QuestionLinkDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
 import com.tf8.quizapp.model.dto.QuizDetailDTO;
 import com.tf8.quizapp.model.entity.*;
@@ -37,7 +38,7 @@ public interface QuizService {
 	 * @param body DTO du nouveau quiz à ajouter
 	 * @return La DTO du quiz à ajouter dans la BDD
 	 */
-	public QuizEntity quizPost(QuizEntity body);
+	public QuizDetailDTO quizPost(QuizEntity body);
 	
 	
 	/**
@@ -93,6 +94,10 @@ public interface QuizService {
 
 
 	QuestionDTO getNextQuestion(Long id);
+
+
+
+	QuizDetailDTO quizQuestionPost(Long quizId, QuestionLinkDTO questionId);
 	
 	
 	/**

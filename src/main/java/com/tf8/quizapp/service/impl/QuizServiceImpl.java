@@ -9,16 +9,23 @@ import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
+import org.springframework.jdbc.support.rowset.SqlRowSet;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
+import com.tf8.quizapp.model.dto.ClassementDTO;
+import com.tf8.quizapp.model.dto.ClassementEntryDTO;
 import com.tf8.quizapp.model.dto.OptionsDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
+import com.tf8.quizapp.model.dto.QuestionLinkDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
 import com.tf8.quizapp.model.dto.QuizDetailDTO;
+import com.tf8.quizapp.model.dto.UserResponseDTO;
 import com.tf8.quizapp.model.entity.*;
 import com.tf8.quizapp.repository.ChooseRepository;
+import com.tf8.quizapp.repository.ClassementRepository;
 import com.tf8.quizapp.repository.OptionsRepository;
 import com.tf8.quizapp.repository.QuestionRepository;
 import com.tf8.quizapp.repository.QuizRepository;
@@ -38,18 +45,22 @@ public class QuizServiceImpl implements QuizService {
 	private final UserRepository userRepository;
 	private final ChooseRepository chooseRepository;
 	private final QuestionRepository questionRepository;
+	private final BCryptPasswordEncoder passwordEncoder;
+	private final ClassementRepository classementRepository;
 
 	
 	
 	/**
      * Injection de dépendance.
      */
-	public QuizServiceImpl(QuizRepository quizRepository, OptionsRepository optionRepository, UserRepository userRepository, ChooseRepository chooseRepository, QuestionRepository questionRepository ) {
+	public QuizServiceImpl(QuizRepository quizRepository, OptionsRepository optionRepository, UserRepository userRepository, ChooseRepository chooseRepository, QuestionRepository questionRepository, ClassementRepository classementRepository, BCryptPasswordEncoder passwordEncoder ) {
 		this.quizRepository = quizRepository;
 		this.optionRepository = optionRepository;
 		this.userRepository = userRepository;
 		this.chooseRepository = chooseRepository;
 		this.questionRepository = questionRepository;
+		this.classementRepository = classementRepository;
+		this.passwordEncoder = passwordEncoder;
 
 	}
 	
@@ -61,6 +72,24 @@ public class QuizServiceImpl implements QuizService {
                 .collect(Collectors.toList());
 	}
 	
+	public QuizDetailDTO quizPost(QuizEntity body) {
+		if (body.getQuestionsList() != null) {
+	        for (QuestionEntity question : body.getQuestionsList()) {
+	            // Pour chaque question, vérifier si elle contient des options
+	            if (question.getOptions() != null) {
+	                for (OptionsEntity option : question.getOptions()) {
+	                    // CRUCIAL : Lier l'option à la question parente
+	                    // Cela permet à Hibernate de remplir la colonne 'question_id'
+	                    option.setQuestion(question);
+	                }
+	            }
+	        }
+	    }
+	    
+	    // Une fois les liens établis, on sauvegarde le quiz
+	    QuizEntity savedQuiz = quizRepository.save(body);
+	    return mapToDetailDTO(savedQuiz);
+	}
 	
 	@Override
 	@Transactional
@@ -85,6 +114,33 @@ public class QuizServiceImpl implements QuizService {
 				.map(this::mapToQuestionDTO) // Utilisation de la nouvelle méthode de mapping
 				.collect(Collectors.toList());
 	}
+	
+	@Override
+	@Transactional
+	public QuizDetailDTO quizQuestionPost(Long quizId, QuestionLinkDTO questionId) {
+		Optional<QuizEntity> quizEntityOptional = quizRepository.findById(quizId);
+		Optional<QuestionEntity> questionEntityOptional = questionRepository.findById(questionId.getQuestionId());
+
+    	if (quizEntityOptional.isPresent() && questionEntityOptional.isPresent()) {
+    		
+    		QuizEntity quiz = quizEntityOptional.get();
+    		QuestionEntity question = questionEntityOptional.get();
+    		
+    		List<QuestionEntity> questionList = quiz.getQuestionsList();
+    		questionList.add(question);
+    		
+    		quiz.setQuestionsList(questionList);
+    		
+    		QuizEntity savedQuiz = quizRepository.save(quiz);
+    		return mapToDetailDTO(savedQuiz);
+    		
+    	} else {
+           
+    		return null; 
+    	}
+		
+	}
+	
 	
 	
 	 
@@ -214,10 +270,6 @@ public class QuizServiceImpl implements QuizService {
 	        return mapToChooseDTO(choose);
 	    }
 	
-	//méthode POST d'un quiz
-	public QuizEntity quizPost(QuizEntity body) {
-		return quizRepository.save(body);
-	}
 	
 	
 	//méthode PUT(modification) d'un quiz
@@ -237,7 +289,75 @@ public class QuizServiceImpl implements QuizService {
 		
 	}
 	
+public ClassementDTO getClassement(Long quizId) {
+		
+		UserServiceImpl userService = new UserServiceImpl(userRepository, passwordEncoder);
+
+	    // DTO principal
+	    ClassementDTO classementDTO = new ClassementDTO();
+	    classementDTO.setQuizId(quizId);
+
+	    List<ClassementEntryDTO> entries = new ArrayList<>();
+
+	    // Données brutes
+	    SqlRowSet rowSet = classementRepository.getClassementRaw(quizId);
+
+	    int rank = 1;
+
+	    while (rowSet.next()) {
+
+	        // --- User ---
+	        UserResponseDTO user = new UserResponseDTO();
+	        long id_joueur = rowSet.getInt("user_id");
+	        user = userService.getUserById(id_joueur);
+	        // --- Entry ---
+	        ClassementEntryDTO entry = new ClassementEntryDTO();
+	        entry.setRank(rank++);
+	        entry.setUser(user);
+	        entry.setScore(rowSet.getInt("Score"));
+
+	        entries.add(entry);
+	    }
+
+	    classementDTO.setEntries(entries);
+
+	    return classementDTO;
+	}
 	
+	
+	public AnswerDTO adminAnswer(Long quizId) {
+		Optional<QuizEntity> quizEntity = quizRepository.findById(quizId);
+		Long correctOptionId = (long) 0;
+		Long questionId =  (long) 0 ;
+        // 2. Vérifier si l'entité existe
+    	if (quizEntity.isPresent()) {
+    		QuizEntity quiz = quizEntity.get();
+			 List<QuestionEntity> lstQuestionQuiz = new ArrayList<>();
+			 lstQuestionQuiz = quiz.getQuestionsList();		 
+			 
+			 QuestionEntity question = lstQuestionQuiz.get(quiz.getCurrentQuestionNumber()-1);
+    		
+			questionId = question.getId();
+    		Set<OptionsEntity> options = new HashSet<>();
+    		options = question.getOptions();	
+    		
+    		
+    		for (OptionsEntity option : options) {
+    			if (option.isCorrect()) {
+    				correctOptionId = option.getId();
+    			}
+    		}
+    		AnswerDTO response = new AnswerDTO();
+    		
+    		response.setCorrectOptionId(correctOptionId);
+    		response.setQuestionId(questionId);
+    		return response;
+    	} else {
+            // 4. Si la question n'est pas trouvée, retourner null ou, 
+            //    mieux, lancer une exception personnalisée (non implémentée ici)
+    		return null; 
+    	}
+	}
 	
 	private QuizDTO mapToDTO(QuizEntity entity) {
 		QuizDTO dto = new QuizDTO();
@@ -276,40 +396,6 @@ public class QuizServiceImpl implements QuizService {
         return dto;
     }
 	
-	public AnswerDTO adminAnswer(Long quizId) {
-		Optional<QuizEntity> quizEntity = quizRepository.findById(quizId);
-		Long correctOptionId = (long) 0;
-		Long questionId =  (long) 0 ;
-        // 2. Vérifier si l'entité existe
-    	if (quizEntity.isPresent()) {
-    		QuizEntity quiz = quizEntity.get();
-			 List<QuestionEntity> lstQuestionQuiz = new ArrayList<>();
-			 lstQuestionQuiz = quiz.getQuestionsList();		 
-			 
-			 QuestionEntity question = lstQuestionQuiz.get(quiz.getCurrentQuestionNumber()-1);
-    		
-			questionId = question.getId();
-    		Set<OptionsEntity> options = new HashSet<>();
-    		options = question.getOptions();	
-    		
-    		
-    		for (OptionsEntity option : options) {
-    			if (option.isCorrect()) {
-    				correctOptionId = option.getId();
-    			}
-    		}
-    		AnswerDTO response = new AnswerDTO();
-    		
-    		response.setCorrectOptionId(correctOptionId);
-    		response.setQuestionId(questionId);
-    		return response;
-    	} else {
-            // 4. Si la question n'est pas trouvée, retourner null ou, 
-            //    mieux, lancer une exception personnalisée (non implémentée ici)
-    		return null; 
-    	}
-	}
-	
 	private QuestionDTO mapToQuestionDTO(QuestionEntity entity) {
         QuestionDTO dto = new QuestionDTO();
         dto.setId(entity.getId());
@@ -339,6 +425,9 @@ public class QuizServiceImpl implements QuizService {
         
         return dto;
     }
+	
+
+
 
 	
 }

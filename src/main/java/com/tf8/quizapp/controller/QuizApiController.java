@@ -12,9 +12,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.jwt.Jwt;
+
 import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
+import com.tf8.quizapp.model.dto.ClassementDTO;
+import com.tf8.quizapp.model.dto.PlayerAnswerDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
+import com.tf8.quizapp.model.dto.QuestionLinkDTO;
 import com.tf8.quizapp.model.dto.QuizDTO;
 import com.tf8.quizapp.model.dto.QuizDetailDTO;
 import com.tf8.quizapp.model.entity.ChooseEntity;
@@ -42,10 +48,20 @@ public class QuizApiController {
 		return quizService.quizGet();
 	}
 	
-	@GetMapping()
-	@RequestMapping("/{id}/questions") 
+	@PostMapping()
+	public QuizDetailDTO quizPost(@RequestBody QuizEntity body) {
+		return quizService.quizPost(body);
+	}
+	
+	@GetMapping("/{id}/questions")
 	public List<QuestionDTO> quizGetQuestions(@PathVariable Long id) {
 		return (List<QuestionDTO>) quizService.quizQuizIdQuestionsGet(id);
+	}
+	
+	@PostMapping("/{id}/questions")
+	public ResponseEntity quizPostQuestions(@PathVariable Long id,@RequestBody QuestionLinkDTO questionId ) {
+		QuizDetailDTO response =  quizService.quizQuestionPost(id, questionId);
+		return new ResponseEntity(response, HttpStatus.ACCEPTED);
 	}
 	
 	@GetMapping()
@@ -53,6 +69,8 @@ public class QuizApiController {
 	public QuizDetailDTO quizGetDetails(@PathVariable Long id) {
 		return (QuizDetailDTO) quizService.quizQuizIdGetDetail(id);
 	}
+	
+	
 	
 	@RequestMapping("/{id}/control/start") 
 	@PostMapping()
@@ -64,11 +82,6 @@ public class QuizApiController {
 	@PostMapping()
 	public QuizDTO quizFinish(@PathVariable Long id) {
 		return quizService.quizFinish(id);
-	}
-	
-	@PostMapping()
-	public QuizEntity quizPost(@RequestBody QuizEntity body) {
-		return quizService.quizPost(body);
 	}
 	
 	@RequestMapping("/{quizId}/play/current-question") 
@@ -85,9 +98,18 @@ public class QuizApiController {
 	
 	@RequestMapping("/{quizId}/play/answer") 
     @PostMapping()
-    public ResponseEntity saveAnswer(@RequestBody ChooseDTO body) {
-		ChooseDTO response = quizService.saveAnswer(body);
-		return new ResponseEntity(response, HttpStatus.ACCEPTED);
+    public ResponseEntity saveAnswer(@RequestBody PlayerAnswerDTO body, @AuthenticationPrincipal Jwt jwt) {
+		//Récupération de la valeur du userId depuis le JWT décodé  
+				Long userId = jwt.getClaim("userId");
+				
+				ChooseDTO body2 = new ChooseDTO();
+				body2.setIdUser(userId);
+				body2.setIdQuiz(body.getQuizId());
+				body2.setIdOption(body.getOptionId());
+				
+				
+				ChooseDTO response = quizService.saveAnswer(body2);
+				return new ResponseEntity(response, HttpStatus.ACCEPTED);
     	 
     }
 	
@@ -98,15 +120,13 @@ public class QuizApiController {
 		return quizService.adminAnswer(quizId);
     	 
     }
-	
-	
-    /*
+    
 	@RequestMapping("/{quizId}/play/leaderboard") 
     @GetMapping()
-    public List<ClassementDTO> getClassement(@PathVariable Long quizId) {
+    public ClassementDTO getClassement(@PathVariable Long quizId) {
     	return quizService.getClassement(quizId);
     }
-	*/
+	
 	
 	
 }
