@@ -37,111 +37,109 @@ import com.tf8.quizapp.service.impl.QuizServiceImpl;
 @RestController
 @RequestMapping("/quiz")
 public class QuizApiController {
-	
+
 	private QuizServiceImpl quizService;
-	
+
 	public QuizApiController(QuizServiceImpl quizService) {
-        this.quizService = quizService;
-    }
-	
+		this.quizService = quizService;
+	}
+
 	@GetMapping()
 	public List<QuizDTO> quizGet() {
 		return quizService.quizGet();
 	}
-	
+
 	@PostMapping()
 	public QuizDetailDTO quizPost(@RequestBody QuizEntity body) {
 		return quizService.quizPost(body);
 	}
-	
+
 	@GetMapping("/{id}/questions")
 	public List<QuestionDTO> quizGetQuestions(@PathVariable Long id) {
 		return (List<QuestionDTO>) quizService.quizQuizIdQuestionsGet(id);
 	}
-	
+
 	@PostMapping("/{id}/questions")
 	public ResponseEntity quizPostQuestions(@PathVariable Long id,@RequestBody QuestionLinkDTO questionId ) {
 		QuizDetailDTO response =  quizService.quizQuestionPost(id, questionId);
 		return new ResponseEntity(response, HttpStatus.ACCEPTED);
 	}
-	
+
 	@GetMapping()
 	@RequestMapping("/{id}") 
 	public QuizDetailDTO quizGetDetails(@PathVariable Long id) {
 		return (QuizDetailDTO) quizService.quizQuizIdGetDetail(id);
 	}
-	
-	
-	
+
+
+
 	@RequestMapping("/{id}/control/start") 
 	@PostMapping()
 	public QuizDTO quizStart(@PathVariable Long id) {
 		return quizService.quizStart(id);
 	}
-	
+
 	@RequestMapping("/{id}/control/finish") 
 	@PostMapping()
 	public QuizDTO quizFinish(@PathVariable Long id) {
 		return quizService.quizFinish(id);
 	}
-	
+
 	@RequestMapping("/{quizId}/play/current-question") 
-    @GetMapping()
-    public QuestionDTO currentQuestion(@PathVariable Long quizId) {
-    	return quizService.getCurrentQuestion(quizId);
-    }
-    
+	@GetMapping()
+	public QuestionDTO currentQuestion(@PathVariable Long quizId) {
+		return quizService.getCurrentQuestion(quizId);
+	}
+
 	@RequestMapping("/{quizId}/play/next-question") 
-    @GetMapping()
-    public QuestionDTO nextQuestion(@PathVariable Long quizId) {
-    	return quizService.getNextQuestion(quizId);
-    }
-	
+	@GetMapping()
+	public QuestionDTO nextQuestion(@PathVariable Long quizId) {
+		return quizService.getNextQuestion(quizId);
+	}
+
 	@RequestMapping("/{quizId}/play/answer") 
-    @PostMapping()
-    public ResponseEntity saveAnswer(@RequestBody PlayerAnswerDTO body, @AuthenticationPrincipal Jwt jwt) {
+	@PostMapping()
+	public ResponseEntity saveAnswer(@RequestBody PlayerAnswerDTO body, @AuthenticationPrincipal Jwt jwt) {
 		//Récupération de la valeur du userId depuis le JWT décodé  
-				Long userId = jwt.getClaim("userId");
-				
-				ChooseDTO body2 = new ChooseDTO();
-				body2.setIdUser(userId);
-				body2.setIdQuiz(body.getQuizId());
-				body2.setIdOption(body.getOptionId());
-				
-				
-				ChooseDTO response = quizService.saveAnswer(body2);
-				return new ResponseEntity(response, HttpStatus.ACCEPTED);
-    	 
-    }
-	
+		Long userId = jwt.getClaim("userId");
+
+		ChooseDTO body2 = new ChooseDTO();
+		body2.setIdUser(userId);
+		body2.setIdQuiz(body.getQuizId());
+		body2.setIdOption(body.getOptionId());
+
+
+		ChooseDTO response = quizService.saveAnswer(body2);
+		return new ResponseEntity(response, HttpStatus.ACCEPTED);
+
+	}
+
 	@RequestMapping("/{quizId}/admin/answer") 
-    @GetMapping()
-    public AnswerDTO adminAnswer(@PathVariable Long quizId) {
+	@GetMapping()
+	public AnswerDTO adminAnswer(@PathVariable Long quizId) {
 		AnswerDTO response = quizService.adminAnswer(quizId);
 		return quizService.adminAnswer(quizId);
-    	 
-    }
-    
-	@RequestMapping("/{quizId}/play/leaderboard") 
-    @GetMapping()
-    public ClassementDTO getClassement(@PathVariable Long quizId) {
-    	return quizService.getClassement(quizId);
-    }
-	
-	//Avec token
-		/*
-		@RequestMapping("/{quizId}/admin/stats")
-		@GetMapping()
-		public AdminStatDTO adminStats(@AuthenticationPrincipal Jwt jwt) {
-			Long quizId = jwt.getClaim("quizId");
-			AdminStatDTO adminStats = new AdminStatDTO();
-			adminStats = quizService.getAdminStats(quizId);
-			return adminStats;
-		}
-		*/
 
-		//Sans token
-		
+	}
+
+	@RequestMapping("/{quizId}/play/leaderboard") 
+	@GetMapping()
+	public ClassementDTO getClassement(@PathVariable Long quizId) {
+		return quizService.getClassement(quizId);
+	}
+
+	//Avec token
+	@RequestMapping("/{quizId}/admin/stats")
+	@GetMapping()
+	public AdminStatDTO adminStats(@AuthenticationPrincipal Jwt jwt) {
+		Long quizId = jwt.getClaim("quizId");
+		AdminStatDTO adminStats = new AdminStatDTO();
+		adminStats = quizService.getAdminStats(quizId);
+		return adminStats;
+	}
+
+	//Sans token
+	/*
 		@RequestMapping("/{quizId}/admin/stats")
 		@GetMapping()
 		public AdminStatDTO adminStats(@PathVariable Long quizId) {
@@ -149,6 +147,6 @@ public class QuizApiController {
 			adminStats = quizService.getAdminStats(quizId);
 			return adminStats;
 		}
-		
-	
+	 */
+
 }
