@@ -376,20 +376,13 @@ public ClassementDTO getClassement(Long quizId) {
 			if(allChoices.get(i).getQuiz().getId().equals(quizId))
 				choicesQuiz.add(allChoices.get(i));
 		}
-		
-		Long currentQuestionId = new Long(1);
-		if(quiz.getCurrentQuestionNumber()!=null)
-			currentQuestionId = Long.valueOf(quiz.getCurrentQuestionNumber());
-		else
-			currentQuestionId = Long.valueOf(listQuestions.get(0).getId());
+
 	
-		/*
 		Integer currentQuestionNumber = 1;
 		if(quiz.getCurrentQuestionNumber()!=null)
 			currentQuestionNumber = quiz.getCurrentQuestionNumber();
 		Long currentQuestionId = new Long(1);
 		currentQuestionId = Long.valueOf(listQuestions.get(currentQuestionNumber-1).getId());
-		*/
 		
 		
 		//stats de la question en cours
