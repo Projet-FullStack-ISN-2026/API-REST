@@ -14,6 +14,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.tf8.quizapp.model.dto.AdminStatDTO;
+import com.tf8.quizapp.model.dto.AdminStatusDTO;
 import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
 import com.tf8.quizapp.model.dto.ClassementDTO;
@@ -68,7 +69,7 @@ public class QuizServiceImpl implements QuizService {
 	
 	
 	//méthode GET de la liste des quiz
-	public List<QuizDTO> quizGet(){
+	public List<QuizDTO> quizGet() {
 		return quizRepository.findAll().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -499,6 +500,24 @@ public ClassementDTO getClassement(Long quizId) {
         
         return dto;
     }
+	
+	public AdminStatusDTO statusLobby(Long quizId) {
+		QuizEntity entity = quizRepository.getById(quizId);
+		AdminStatusDTO dto = new AdminStatusDTO();
+		QuizDTO quizdto = new QuizDTO();
+		quizdto.setCurrentQuestionNumber(entity.getCurrentQuestionNumber());
+		quizdto.setId(entity.getId());
+		quizdto.setStartQuestionTime(entity.getStartQuestionTime());
+		quizdto.setStatus(entity.getStatus());
+		quizdto.setStep(entity.getStep());
+		quizdto.setTitle(entity.getTitle());
+		
+		dto.setQuizId(entity.getId());
+		dto.setQuiz(quizdto);
+		
+		return dto;
+		
+	}
 	
 
 
