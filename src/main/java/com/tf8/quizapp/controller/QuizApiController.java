@@ -16,6 +16,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.jwt.Jwt;
 
 import com.tf8.quizapp.model.dto.AdminStatDTO;
+import com.tf8.quizapp.model.dto.AdminStatusDTO;
 import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
 import com.tf8.quizapp.model.dto.ClassementDTO;
@@ -136,6 +137,12 @@ public class QuizApiController {
 		AdminStatDTO adminStats = new AdminStatDTO();
 		adminStats = quizService.getAdminStats(quizId);
 		return adminStats;
+	}
+	
+	@RequestMapping("/{quizId}/admin/status")
+	@GetMapping()
+	public AdminStatusDTO adminStatus(@PathVariable Long quizId) {
+		return quizService.statusLobby(quizId);
 	}
 
 	//Sans token
