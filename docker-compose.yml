@@ -1,0 +1,48 @@
+services:
+  backend:
+    build: .
+    container_name: fullstack_backend
+    environment:
+      - DB_HOST=${DB_HOST}
+      - MYSQL_DATABASE=${MYSQL_DATABASE}
+      - MYSQL_USER=${MYSQL_USER}
+      - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      mysql:
+        condition: service_healthy
+        restart: true
+    ports:
+      - "8080:8080"
+    networks:
+      - fullstack-backend
+
+  mysql:
+    image: mysql:9.4.0
+    container_name: fullstack-mysql
+    environment:
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "mysqladmin ping -h localhost -u ${MYSQL_USER} -p${MYSQL_PASSWORD}",
+        ]
+      interval: 10s
+      retries: 5
+      start_period: 15s
+      timeout: 10s
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - fullstack-backend
+
+volumes:
+  mysql_data:
+networks:
+  fullstack-backend:
