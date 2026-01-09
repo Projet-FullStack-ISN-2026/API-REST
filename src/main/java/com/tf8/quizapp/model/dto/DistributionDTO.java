@@ -10,7 +10,6 @@ public class DistributionDTO {
     private double percentage;
     
     public DistributionDTO () {
-	
     }
     
     public DistributionDTO (Long optionId, Integer count, double pourcentage) {
@@ -37,6 +36,4 @@ public class DistributionDTO {
 	public void setPercentage(double percentage) {
 		this.percentage = percentage;
 	}
-    
-    
 }
