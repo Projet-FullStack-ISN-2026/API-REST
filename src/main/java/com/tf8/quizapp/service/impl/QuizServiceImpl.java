@@ -13,10 +13,13 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.tf8.quizapp.model.dto.AdminStatDTO;
+import com.tf8.quizapp.model.dto.AdminStatusDTO;
 import com.tf8.quizapp.model.dto.AnswerDTO;
 import com.tf8.quizapp.model.dto.ChooseDTO;
 import com.tf8.quizapp.model.dto.ClassementDTO;
 import com.tf8.quizapp.model.dto.ClassementEntryDTO;
+import com.tf8.quizapp.model.dto.DistributionDTO;
 import com.tf8.quizapp.model.dto.OptionsDTO;
 import com.tf8.quizapp.model.dto.QuestionDTO;
 import com.tf8.quizapp.model.dto.QuestionLinkDTO;
@@ -66,7 +69,7 @@ public class QuizServiceImpl implements QuizService {
 	
 	
 	//méthode GET de la liste des quiz
-	public List<QuizDTO> quizGet(){
+	public List<QuizDTO> quizGet() {
 		return quizRepository.findAll().stream()
                 .map(this::mapToDTO)
                 .collect(Collectors.toList());
@@ -359,6 +362,78 @@ public ClassementDTO getClassement(Long quizId) {
     	}
 	}
 	
+	public AdminStatDTO getAdminStats(Long quizId){
+
+		AdminStatDTO adminStat = new AdminStatDTO();
+		Integer totalVotesQuestion;
+		List<DistributionDTO> listDistributions;
+
+		QuizEntity quiz = quizRepository.getById(quizId);
+		List<QuestionEntity> listQuestions = quiz.getQuestionsList();
+
+		List<ChooseEntity> allChoices = chooseRepository.findAll();
+		List<ChooseEntity> choicesQuiz = new ArrayList<>();
+		for(int i=0; i<allChoices.size();i++) {
+			if(allChoices.get(i).getQuiz().getId().equals(quizId))
+				choicesQuiz.add(allChoices.get(i));
+		}
+
+	
+		Integer currentQuestionNumber = 1;
+		if(quiz.getCurrentQuestionNumber()!=null)
+			currentQuestionNumber = quiz.getCurrentQuestionNumber();
+		Long currentQuestionId = new Long(1);
+		currentQuestionId = Long.valueOf(listQuestions.get(currentQuestionNumber-1).getId());
+		
+		
+		//stats de la question en cours
+		totalVotesQuestion = 0;
+		listDistributions = new ArrayList<>();
+
+		//id de la question
+		adminStat.setQuestionId(currentQuestionId);
+
+		//nombre total de votes pour la question
+		for(int i=0; i<choicesQuiz.size(); i++) {
+			OptionsEntity choiceOption = choicesQuiz.get(i).getOption();
+			QuestionEntity choiceQuestion = choiceOption.getQuestion();
+			if(choiceQuestion.getId().equals(adminStat.getQuestionId())) {
+				totalVotesQuestion = totalVotesQuestion + 1;
+			}
+		}
+		adminStat.setTotalVotes(totalVotesQuestion);
+
+		//Pour l'ensemble des distributions des options d'une question
+		DistributionDTO distribution;
+		List<OptionsEntity> allOptions = optionRepository.findAll();
+		List<OptionsEntity> optionsQuestion = new ArrayList<>();
+		for(int i=0; i<allOptions.size() ;i++) {
+			if(allOptions.get(i).getQuestion().getId().equals(adminStat.getQuestionId())) {
+				optionsQuestion.add(allOptions.get(i));
+			}
+		}
+
+		for(int i=0; i<optionsQuestion.size(); i++) {
+			distribution = new DistributionDTO();
+			distribution.setOptionId(optionsQuestion.get(i).getId());
+			Integer countOption = 0;
+			for(int j=0; j<choicesQuiz.size() ;j++) {
+				if(choicesQuiz.get(j).getOption().getId().equals(distribution.getOptionId()))
+					countOption = countOption + 1;
+			}
+			distribution.setCount(countOption);
+			Double percentage = (double) countOption*100 / (double) totalVotesQuestion ; 
+			distribution.setPercentage(percentage);
+
+			listDistributions.add(distribution);
+		}
+		adminStat.setListDistribution(listDistributions);
+
+
+		return adminStat;
+	}
+
+	
 	private QuizDTO mapToDTO(QuizEntity entity) {
 		QuizDTO dto = new QuizDTO();
         dto.setId(entity.getId());
@@ -425,6 +500,24 @@ public ClassementDTO getClassement(Long quizId) {
         
         return dto;
     }
+	
+	public AdminStatusDTO statusLobby(Long quizId) {
+		QuizEntity entity = quizRepository.getById(quizId);
+		AdminStatusDTO dto = new AdminStatusDTO();
+		QuizDTO quizdto = new QuizDTO();
+		quizdto.setCurrentQuestionNumber(entity.getCurrentQuestionNumber());
+		quizdto.setId(entity.getId());
+		quizdto.setStartQuestionTime(entity.getStartQuestionTime());
+		quizdto.setStatus(entity.getStatus());
+		quizdto.setStep(entity.getStep());
+		quizdto.setTitle(entity.getTitle());
+		
+		dto.setQuizId(entity.getId());
+		dto.setQuiz(quizdto);
+		
+		return dto;
+		
+	}
 	
 
 
